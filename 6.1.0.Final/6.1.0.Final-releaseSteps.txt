@@ -1,0 +1,116 @@
+release 6.1.0.Final..:
+++++++++++++++++++++
+
+PREPARATION..: 29.07.2014
+**************
+xx. > Alert the dev mailing list and the IRC channel that releaseing starts
+xx. > check if a new version of UF and JBos ip-bom is needed
+xx. > mkdir /home/kiereleaseuser/Release/6.1.0.Final
+xx. > mkdir /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution
+xx. > cd /home/kiereleaseuser/droolsjbpm (change directory to reps)
+xx. > stop all JBoss and Tomcat instances and crontab-jobs on hp-dl380pg8-01.lab.eng.brq.redhat.com
+xx. > stop all build jobs in crontab of jbpm-master-build and jbpm-6-0-build
+xx. > remove all /tmp/*.jar to prevent false alarms when executing the unit tests
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > gitall checkout 6.1.x
+xx. > gitall fetch origin (fetches all updates of all reps from origin)
+xx. > gitall rebase origin/6.1.x 6.1.x (rebases origin/6.1.x onto 6.1.x)
+
+30.07.2014..:
+xx. > mvnallCleanTests (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt )
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh with 6.1.0.Final as new release name, droolsjbpm as artifacts source, 6.1.0.CR2 as directory to delete
+      and 6.1.x as path where the artifacts have to be stored
+xx. > gitall checkout -b r6.1.0.Final 6.1.x (checks out a branch r6.1.0.Final based on 6.1.x)
+xx. > sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.1.0-SNAPSHOT 6.1.0.Final 6.1.0-SNAPSHOT 6.1.0.Final
+xx. > check if all versions have been updated on master to 6.1.0.Final
+xx. > gitall add . (adds all modified files on master and brings them in the staging area)
+xx. > mvnallCleanInstall (checks if everything builds after version upgrade to 6.1.0.Final)
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh with 6.1.0.Final as new release name, droolsjbpm as artifacts source, 6.1.0.Final as directory to delete
+      and 6.1.x as path where the artifacts have to be stored (this time only the artifacts will be copied)
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Final/docs_jboss_org /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Final/download_jboss_org /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution
+xx. > cp /home/kiereleaseuser/droolsjbpm/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.1.0.Final.zip /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution/download_jboss_org/6.1.0.Final
+xx. > SANITY CHECKS: tests & deployment on fifferent application servers
+xx. > gitall status (to review on master if some files/directories shouldn't be added)
+xx. > gitall commit -m "upgrade to new version: 6.1.0.Final"
+xx. > create new versions on JIRA (Drools, Guvnor, Optaplanner and jBPM) since the local branch is created - "without release date"
+xx. > gitall tag -l : checks  all the tags (to check which tags are existing)
+
+31.07.2014..:
+xx. > gitall checkout 6.1.x 
+xx. > gitall fetch origin 6.1.x
+xx. > gitall rebase origin/6.1.x 6.1.x
+xx. > sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.1.0-SNAPSHOT 6.1.1-SNAPSHOT 6.1.0-SNAPSHOT 6.1.1-SNAPSHOT
+      droolsjbpm-tools didn't change it's version because of qualifier problems
+xx. > gitall reset --hard (to restore the snapshot before the update-version script)
+xx. > in all files in droolsjbpm-tools look for "6.1.0.qualifier" and change that to "6.1.1.qualifier" (*.xml and some MANIFEST.MF)
+xx. > sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.1.0-SNAPSHOT 6.1.1-SNAPSHOT 6.1.0-SNAPSHOT 6.1.1-SNAPSHOT
+xx. > check if there are changed all versions to 6.1.1-SNAPSHOT
+xx. > mvnallCleanInstall(checks if everything builds after version upgrade to 6.1.1-SNAPSHOT)
+xx. > gitall add .
+xx. > gitall commit -m "upgrade to 6.1.1-SNAPSHOT"
+
+      Pulled last commit https://github.com/droolsjbpm/kie-wb-distributions/commit/8e3239ebb to kie-wb-distributions because kie-drools-wb is not deployable on Tomcat 7
+xx. > cd kie-wb-distributions
+xx. > git pull --rebase origin 6.1.x (pick the mising commitID)
+xx. > git checkout r6.1.0.Final
+xx. > git chery-pick -x 8e3239ebb68afc5530cc46a149785ce83b2b9a1a
+xx. > mvn clean install -Dfull -DskipTests (to rebuild the artifacts)
+xx. > copied kie-drools-wb-XXX-*.war (EAP_6.1, AS7, Tomcat7, Wildfly, Websphere) to /var/jbpmartifacts/6.1.x/6.1.0.Final
+xx. > gitall checkout r6.1.0.Final (checks out to r6.1.0.Final branch)
+
+01.08.2014..:
+xx. > cherry picked
+      droolsjbpm-tools:1ebb3323647d67389c1f5ecc54bbab177f8c21dc krisv
+      kie-wb-distributions: 9afa762c769f20eee95283e39d04b3e5d74a73ec manstis
+      kie-wb-distributions: 339194fdb4abb1e34cdc8d0a543e56b506345997 maciej
+      kie-wb-distributions: 947860a5609512372eb9c56fbf0dcd10147a4dbf salaboy
+xx. > mvncleanInstall
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Final/docs_jboss_org /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Final/download_jboss_org /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution
+xx. > cp /home/kiereleaseuser/droolsjbpm/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.1.0.Final.zip /home/kiereleaseuser/Release/6.1.0.Final/droolsjbpm-uber-distribution/download_jboss_org/6.1.0.Final
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh with 6.1.0.Final as new release name, droolsjbpm as artifacts source, 6.1.0.CR2 as directory to delete
+      and 6.1.x as path where the artifacts have to be stored
+xx. > gitall tag -a 6.1.0.Final -m "Tagging 6.1.0.Final"
+xx. > gitall tag -l : checks  all the tags (to check if the tags were created)
+xx. > go to Nexus, menu item Staging repositories, drop all your old staging repositories
+xx. > mvnallCleanDeploy (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean deploy -Dfull -DskipTests" --> deploys everything to Nexus - (<25:28> hrs))
+xx. > staging repository on Nexus: [jboss-releases-staging-profile-<3654>]
+xx. > close the repository on Nexus : close ( as discription edit the realease name [droolsjbpm 6.1.0.Final] )
+xx. > gitall tag -l : checks  all the tags
+xx. > release repository on Nexus
+
+03.08.2014..:
+xx. > gitall push origin 6.1.0.Final [pushes the tag 6.1.0.Final to the blessed repository]
+xx. > enter release date on JIRA (Drools, Guvnor, Optaplanner and jBPM) --> <02/08/2014>
+xx. > mail to bsig and ryan zhang that this release is done
+xx. > upload zips and docs to http://filemngmt.jboss.org (No pwd to the server)
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.1.0.Final: updates link to the right directories on filemngmt.jboss.org
+xx. > mvnallClean (to clen all projects and delete the /targets to save disk space)
+xx. > gitall checkout master : switch back from release branch to master branch
+xx. > 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

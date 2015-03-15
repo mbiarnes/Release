@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.remote.services.rest.query.QueryResourceQueryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.582 sec <<< FAILURE! - in org.kie.remote.services.rest.query.QueryResourceQueryTest
+queryModificationServiceTest(org.kie.remote.services.rest.query.QueryResourceQueryTest)  Time elapsed: 1.579 sec  <<< FAILURE!
+java.lang.AssertionError: Num var logs found. expected:<1> but was:<3>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:555)
+	at org.kie.remote.services.rest.query.QueryResourceQueryTest.queryModificationServiceTest(QueryResourceQueryTest.java:171)
+

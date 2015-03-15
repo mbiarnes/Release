@@ -1,0 +1,15 @@
+..: droolsjbpm/drools/drools-pmml/pom.xml  
+
+<artifactId>drools-pmml</artifactId>
+  <groupId>org.drools</groupId>
+<version>6.1.0.Beta1</version> changed. Was 6.1.0-SNAPSHOT before
+
+
+
+jbpm-console-ng/jbpm-console-ng-showcase/pom.xml
+
+<dependency>
+  <groupId>org.jbpm</groupId>
+  <artifactId>jbpm-console-ng-generic-client</artifactId>
+  <version>6.0.1.Beta1</version>
+  </dependency>

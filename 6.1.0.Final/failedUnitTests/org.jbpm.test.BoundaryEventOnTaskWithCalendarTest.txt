@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.test.BoundaryEventOnTaskWithCalendarTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 33.824 sec <<< FAILURE! - in org.jbpm.test.BoundaryEventOnTaskWithCalendarTest
+testProcessWithTimeCycleISO(org.jbpm.test.BoundaryEventOnTaskWithCalendarTest)  Time elapsed: 28.773 sec  <<< FAILURE!
+java.lang.AssertionError: Node(s) not executed: Koniec1
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.jbpm.test.JbpmJUnitBaseTestCase.assertNodeTriggered(JbpmJUnitBaseTestCase.java:514)
+	at org.jbpm.test.BoundaryEventOnTaskWithCalendarTest.testProcessWithTimeCycleISO(BoundaryEventOnTaskWithCalendarTest.java:65)
+

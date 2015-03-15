@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.test.timer.GlobalQuartzDBTimerServiceTest
+-------------------------------------------------------------------------------
+Tests run: 45, Failures: 1, Errors: 0, Skipped: 9, Time elapsed: 304.259 sec <<< FAILURE! - in org.jbpm.test.timer.GlobalQuartzDBTimerServiceTest
+testTimerStartManagerClose[2](org.jbpm.test.timer.GlobalQuartzDBTimerServiceTest)  Time elapsed: 7.077 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<3> but was:<2>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:555)
+	at org.junit.Assert.assertEquals(Assert.java:542)
+	at org.jbpm.test.timer.GlobalQuartzDBTimerServiceTest.testTimerStartManagerClose(GlobalQuartzDBTimerServiceTest.java:128)
+

@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.remote.client.jaxb.JaxbRemoteClientSerializationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.076 sec <<< FAILURE! - in org.kie.remote.client.jaxb.JaxbRemoteClientSerializationTest
+taskSummaryListTest(org.kie.remote.client.jaxb.JaxbRemoteClientSerializationTest)  Time elapsed: 5.9 sec  <<< ERROR!
+javax.persistence.PersistenceException: [PersistenceUnit: org.jbpm.persistence.jpa] Unable to build EntityManagerFactory
+	at org.jboss.naming.remote.protocol.IoFutureHelper.get(IoFutureHelper.java:97)
+	at org.jboss.naming.remote.client.HaRemoteNamingStore.failOverSequence(HaRemoteNamingStore.java:198)
+	at org.jboss.naming.remote.client.HaRemoteNamingStore.namingStore(HaRemoteNamingStore.java:149)
+	at org.jboss.naming.remote.client.HaRemoteNamingStore.namingOperation(HaRemoteNamingStore.java:130)
+	at org.jboss.naming.remote.client.HaRemoteNamingStore.lookup(HaRemoteNamingStore.java:271)
+	at org.jboss.naming.remote.client.RemoteContext.lookup(RemoteContext.java:79)
+	at javax.naming.InitialContext.lookup(InitialContext.java:396)
+	at org.hibernate.service.jndi.internal.JndiServiceImpl.locate(JndiServiceImpl.java:65)
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.configure(DatasourceConnectionProviderImpl.java:116)
+	at org.hibernate.service.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:85)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:184)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:156)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.buildJdbcConnectionAccess(JdbcServicesImpl.java:223)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:89)
+	at org.hibernate.service.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:85)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:184)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:156)
+	at org.hibernate.cfg.Configuration.buildTypeRegistrations(Configuration.java:1825)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1783)
+	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:899)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:59)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47)
+	at org.jbpm.test.JbpmJUnitBaseTestCase.setUp(JbpmJUnitBaseTestCase.java:186)
+	at org.kie.remote.client.jaxb.JaxbRemoteClientSerializationTest.taskSummaryListTest(JaxbRemoteClientSerializationTest.java:54)
+

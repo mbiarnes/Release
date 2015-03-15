@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.camel.component.CamelEndpointWithJaxbXSDModelTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.075 sec <<< FAILURE! - in org.kie.camel.component.CamelEndpointWithJaxbXSDModelTest
+testSessionInsert(org.kie.camel.component.CamelEndpointWithJaxbXSDModelTest)  Time elapsed: 0.073 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbXSDModelTest.registerKnowledgeRuntime(CamelEndpointWithJaxbXSDModelTest.java:207)
+	at org.kie.camel.component.CamelEndpointWithJaxbXSDModelTest.configureDroolsContext(CamelEndpointWithJaxbXSDModelTest.java:184)
+

@@ -1,0 +1,130 @@
+RELEASE 6.2.0.CR1..:
+++++++++++++++++++++
+
+PREPARATION..: 10.10.2014 (first CUT OFF DATE)
+**************
+xx. > Alert the dev mailing list and the IRC channel that releasing starts
+
+
+Releasing I.:: 13.10.2014
+**************
+xx. > cd /home/kiereleaseuser/droolsjbpm/master/
+xx. > gitall pull origin master [update master branch to most recent commits]
+xx. > mkdir /home/kiereleaseuser/droolsjbpm/6.2.
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/master/* /home/kiereleaseuser/droolsjbpm/6.2.x
+xx. > cd /home/kiereleaseuser/droolsjbpm/6.2.x
+xx. > gitall checkout -b 6.2.x master [makes an own branch for 6.2.x based on master]
+xx. > mvnall clean install -DskipTests [to se if 6.2.x branch compiles]
+xx. > cd /home/kiereleaseuser/droolsjbpm/master/
+xx. > removed all repositories 
+xx. > sh clone-all.sh [clones all repositories again]
+xx. > droolsjbpm-tools will not upgrade automatically as there are still a 6.2.0.qualifier (/home/kiereleaseuser/droolsjbpm/droolsjbpm-tools/drools-eclipse/org.drools.updatesite/category.xml)
+     these have to be changed manually. the 6.2.0.qualifier has to be changed to 6.3.0.qualifier
+xx. > sh /home/kiereleaseuser/droolsjbpm/master/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.2.0-SNAPSHOT 6.3.0-SNAPSHOT 6.2.0-SNAPSHOT 6.3.0-SNAPSHOT
+xx. > mvnall clean [to get rid of taget directories]
+xx. > check all projects if there are still 6.2.0-SNAPSHOTS or 6.2.0
+xx. > mvnallCleanInstall [to se if all build after the version upgrade]
+xx. > gitall add .
+xx. > gitall commit -m "upgrade to next -SNAPSHOT"
+xx. > mail to Zanata leads to create a new 6.3.0 version where master points to
+
+Zanata stuff..: 15.10.2014
+xx. > Zanata pulls: look at home/kiereleaseuser/Release/6.2.0.CR1/Zanata_6.2.0-list.txt
+
+Releasing II: 22.10.2014 (second CUT OFF DATE)
+*************
+xx. > cd /home/kiereleaseuser/droolsjbpm/6.2.x.
+xx. > gitall checkout 6.2.x
+xx. > gitall pull origin 6.2.x
+xx. > gitall checkout -b r6.2.0.CR1 6.2.x
+xx. > mail to bsig that r6.2.0.CR1 is branched and only cherry-picks are allowed
+xx. > announce in IRC channels: community 6.2.0.CR1 branched locally - ONLY cherry-picks
+xx. > mvnall clean install -DskipTests {see if everything compiles}
+xx. > mail to ip-bom developers if 6.0.0.CR15 can be released
+xx. > release dashbuilder 0.1.4.CR2 as a version is needed for releasing the 6.2.0.CR1
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh with 6.2.0.CR1 as new release name, droolsjbpm/6.2.x as artifacts source, 6.2.0.CR1 as directory to delete
+      and 6.2.x as path where the artifacts have to be stored
+xx. > sanity checks  
+
+Releasing III: 23.10.2014
+**************
+xx. > cherry-picked:
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/66e067f55 [66e067f55903a6d9964731facd7065f231cba464] porcelli
+      https://github.com/droolsjbpm/droolsjbpm-build-bootstrap/commit/7fb10378fa9af14f17401db72323524ab1842f33 [7fb10378fa9af14f17401db72323524ab1842f33] manstis
+      https://github.com/droolsjbpm/kie-uberfire-extensions/commit/399f1957b1c82664be46c523d0daeb0eb3eb6090 [399f1957b1c82664be46c523d0daeb0eb3eb6090] manstis
+      https://github.com/droolsjbpm/drools-wb/commit/d294605c4d8ed95cb14d6ef17646bf9a3b88a2d0 [d294605c4d8ed95cb14d6ef17646bf9a3b88a2d0] manstis
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/69641eb715dcec37a2670e7edf1bb325aa4c8049 [69641eb715dcec37a2670e7edf1bb325aa4c8049] jeremyl
+      https://github.com/droolsjbpm/droolsjbpm-integration/commit/5f82e2c0fd5a3a4305811986a47bc2a2a314a262 [5f82e2c0fd5a3a4305811986a47bc2a2a314a262] mriet
+xx. > mvnall clean install -Dcustom-container -DskipTests - to check if everything compiles after cherry-picks
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > sh /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.2.0-SNAPSHOT 6.2.0.CR1 6.2.0-SNAPSHOT 6.2.0.CR1
+xx. > mvnall clean [to get rif of all /target directories]
+xx. > check if there are still some -SNASPHOTS and change them manually
+xx. > mvnallCleanInstall - to check if everything compiles
+xx. > gitall add .
+xx. > gitall commit -m "upgraded to 6.2.0.CR1"
+xx. > added missing cherry picks
+      https://github.com/droolsjbpm/droolsjbpm-build-bootstrap/commit/7005c17a58e4a98617ebbc1706e717cab68573e1
+      https://github.com/droolsjbpm/drools/commit/63b7940567fab1c5d2dc58b0d8bf08cd51389d11
+      https://github.com/droolsjbpm/droolsjbpm-integration/commit/184e907cb9022e5514200e1a2503bdeb9e6400af
+      https://github.com/droolsjbpm/droolsjbpm-knowledge/commit/d9f3161313f55638daa59df8fec4ed8f9d07bce0
+      https://github.com/droolsjbpm/guvnor/commit/80336a501843ef448f89051e0c24001b42cd0190
+      https://github.com/droolsjbpm/guvnor/commit/4ef22a49a0f3d65f9fe6d849a66520db35fa4754
+xx. > mvnallCleanInstall {to get the artifacts}
+
+Releasing IV: 24.10.2014
+**************
+xx. > cp /var/jbpm-artifacts/6.2.x/6.2.0.CR1/failedUnitTests/* /home/kiereleaseuser/Release/6.2.0.CR1/failedUnitTests/ (copies all failed unit tests)
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh with 6.2.0.CR1 as new release name, droolsjbpm/6.2.x as artifacts source, 6.2.0.CR1 as directory to delete
+      and 6.2.x as path where the artifacts have to be stored
+xx. > cp /home/kiereleaseuser/Release/6.2.0.CR1/failedUnitTests/* /var/jbpm-artifacts/6.2.x/6.2.0.CR1/failedUnitTests [copies the unit tests back]
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0.CR1/docs_jboss_org /home/kiereleaseuser/Release/6.2.0.CR1/droolsjbpm-uber-distribution
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0.CR1/download_jboss_org /home/kiereleaseuser/Release/6.2.0.CR1/droolsjbpm-uber-distribution
+xx. > cp /home/kiereleaseuser/droolsjbpm/6.2.x/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.2.0.CR1.zip /home/kiereleaseuser/Release/6.2.0.CR1/droolsjbpm-uber-distribution/download_jboss_org/6.2.0.CR1
+xx. > gitall tag -l : checks  all the tags (to check which tags are existing)
+xx. > gitall tag -a 6.2.0.CR1 -m "Tagging 6.2.0.CR1"
+
+
+Deploying..: 25.10.2014
+***********
+xx. > check on Nexus if there are any repositories of kiereleaseuser [if so remove them]
+xx. > mvnallCleanDeploy [deploys on Nexus] repository 4095
+      Repository	jboss_releases_staging_profile-4109 (JBoss Releases Staging Profile)
+      Created Saturday, October 25, 2014 10:23:41 CEST (GMT+0200)
+      Updated Monday, October 27, 2014 06:13:13 CET (GMT+0100)
+
+Closing and releasing the rep..: 27.10.2014
+********************************
+xx. > close & release repository on Nexus
+xx. > enter release date on JIRA (Drools, Guvnor, Optaplanner and jBPM) --> <19/09/2014>
+xx. > mail to bsig and ryan zhang that this release is done
+xx. > upload zips and docs to http://filemngmt.jboss.org
+xx. > tell JuanMa to adjust the drools website accrdingly to 6.2.0.CR1
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.2.0.CR1 [updates link to the right directories on filemngmt.jboss.org]
+xx. > mvnallClean (to clean all projects and delete the /targets to save disk space)
+xx. > gitall checkout master : switch back from release branch to master branch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+                                  upgrade version
+                                  to 6.2.0.CR3                                                              
+droolsjbpm-build-bootstrap        x
+droolsjbpm-knowledge		  x
+drools                            x
+optaplanner	                  x
+jbpm			          x                   
+droolsjbpm-integration	          x                    
+droolsjbpm-tools		  x                    
+droolsjbpm-build-distribution	  x                    
+kie-uberfire-extensions		  x
+guvnor				  x
+kie-wb-common			  x
+jbpm-form-modeler	          x
+drools-wb		          x
+jbpm-designer		          x
+jbpm-console-ng		          x
+dashboard-builder	          x
+jbpm-dashboard			  x
+kie-wb-distributions              x
+ 

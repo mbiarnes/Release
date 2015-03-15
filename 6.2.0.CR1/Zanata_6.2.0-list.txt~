@@ -1,0 +1,21 @@
+Zanata for 6.2.0.CR1
+
+> git checkout -b zanata_6.2.x 6.2.x
+
+                         mvn zanata:pull-module | mvn replacer:replace -N | mvn clean install -Dfull -DskipTests | mvn clean | git add (changes) | git commit -m "Zanata changes for 6.2.0.CR1" | git push origin <commitId>:6.2.x
+kie-uberfire-extensions: x                        --                        --                                     --          --                  --                                             --                   
+guvnor:                  x                        x                         x                                      x           x                   x                                              x 
+kie-wb-common:           x                        x                         x                                      x           x                   x                                              x
+jbpm_form_modeler:       x                        x                         x                                      x           x                   x                                              x      
+drools-wb:               x                        x                         x                                      x           x                   x                                              x 
+jbpm-designer:           x                        x                         x                                      x           x                   x                                              x
+jbpm-console-ng:         x                        x                         x                                      x           x                   x                                              x
+dashbuilder:             x                        x                         x                                      x           x                   x                                              x                                      
+jbpm-dashboard:          x                        x                         x                                      x           x                   x                                              x   
+kie-wb-distributions:    x                        x                         x                                      x           x                   x                                              x
+uberfire:                x                        x     
+             
+             
+                         
+       
+           

@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.process.audit.query.AuditQueryTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.003 sec <<< FAILURE! - in org.jbpm.process.audit.query.AuditQueryTest
+rangeQueryBuilderTest(org.jbpm.process.audit.query.AuditQueryTest)  Time elapsed: 0.07 sec  <<< FAILURE!
+java.lang.AssertionError: duration union min, max result: 3
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.jbpm.process.audit.query.AuditQueryTest.rangeQueryBuilderTest(AuditQueryTest.java:627)
+

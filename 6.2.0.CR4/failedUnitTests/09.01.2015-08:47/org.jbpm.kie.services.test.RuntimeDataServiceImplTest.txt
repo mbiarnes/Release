@@ -1,0 +1,267 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.kie.services.test.RuntimeDataServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 30, Failures: 0, Errors: 29, Skipped: 0, Time elapsed: 35.142 sec <<< FAILURE! - in org.jbpm.kie.services.test.RuntimeDataServiceImplTest
+testGetTaskAssignedAsBusinessAdmin(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 9.31 sec  <<< ERROR!
+java.lang.IllegalArgumentException: Named query not found: TasksAssignedAsBusinessAdministratorByStatus
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createNamedQuery(AbstractEntityManagerImpl.java:601)
+	at org.jbpm.shared.services.impl.JpaPersistenceContext.getQueryByName(JpaPersistenceContext.java:30)
+	at org.jbpm.shared.services.impl.JpaPersistenceContext.queryWithParametersInTransaction(JpaPersistenceContext.java:41)
+	at org.jbpm.shared.services.impl.commands.QueryNameCommand.execute(QueryNameCommand.java:34)
+	at org.jbpm.shared.services.impl.TransactionalCommandService.execute(TransactionalCommandService.java:42)
+	at org.jbpm.kie.services.impl.RuntimeDataServiceImpl.getTasksAssignedAsBusinessAdministrator(RuntimeDataServiceImpl.java:631)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.testGetTaskAssignedAsBusinessAdmin(RuntimeDataServiceImplTest.java:789)
+
+testGetTaskAssignedAsBusinessAdminPagingAndFiltering(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 1.703 sec  <<< ERROR!
+java.lang.IllegalArgumentException: Named query not found: TasksAssignedAsBusinessAdministratorByStatus
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createNamedQuery(AbstractEntityManagerImpl.java:601)
+	at org.jbpm.shared.services.impl.JpaPersistenceContext.getQueryByName(JpaPersistenceContext.java:30)
+	at org.jbpm.shared.services.impl.JpaPersistenceContext.queryWithParametersInTransaction(JpaPersistenceContext.java:41)
+	at org.jbpm.shared.services.impl.commands.QueryNameCommand.execute(QueryNameCommand.java:34)
+	at org.jbpm.shared.services.impl.TransactionalCommandService.execute(TransactionalCommandService.java:42)
+	at org.jbpm.kie.services.impl.RuntimeDataServiceImpl.getTasksAssignedAsBusinessAdministrator(RuntimeDataServiceImpl.java:631)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.testGetTaskAssignedAsBusinessAdminPagingAndFiltering(RuntimeDataServiceImplTest.java:839)
+
+testGetProcessByDeploymentIdAndProcessId(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 1.093 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByPartialProcessNameAndState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 1.053 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByProcessId(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.983 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByProcessIdAndStatus(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 1.021 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByPartialProcessIdAndState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.921 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.913 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByProcessIdAndStateAndInitiator(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.926 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcesses(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 1.038 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstanceById(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.845 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessesSortByProcessVersion(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.816 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessByFilter(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.794 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByStateAndInitiator(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.811 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetTaskByWorkItemId(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.78 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetTaskById(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.76 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetVariableLogs(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.744 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstances(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.76 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByDeploymentIdAndState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.744 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetTaskOwned(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.748 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByProcessIdAndState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.717 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessByDeploymentId(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.713 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstancesByProcessNameAndState(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.707 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessByProcessId(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.711 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessInstanceHistory(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.703 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetTaskAssignedAsBusinessAdminPaging(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.781 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessesSortByProcessName(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.697 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetNodeInstanceForWorkItem(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.682 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
+testGetProcessIds(org.jbpm.kie.services.test.RuntimeDataServiceImplTest)  Time elapsed: 0.699 sec  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.IllegalStateException: RuntimeManager with id org.jbpm.test:test-module:1.0.0-SNAPSHOT is already active
+	at org.jbpm.runtime.manager.impl.AbstractRuntimeManager.<init>(AbstractRuntimeManager.java:88)
+	at org.jbpm.runtime.manager.impl.SingletonRuntimeManager.<init>(SingletonRuntimeManager.java:71)
+	at org.jbpm.runtime.manager.impl.RuntimeManagerFactoryImpl.newSingletonRuntimeManager(RuntimeManagerFactoryImpl.java:62)
+	at org.jbpm.kie.services.impl.AbstractDeploymentService.commonDeploy(AbstractDeploymentService.java:129)
+	at org.jbpm.kie.services.impl.KModuleDeploymentService.deploy(KModuleDeploymentService.java:152)
+	at org.jbpm.kie.services.test.RuntimeDataServiceImplTest.prepare(RuntimeDataServiceImplTest.java:100)
+
