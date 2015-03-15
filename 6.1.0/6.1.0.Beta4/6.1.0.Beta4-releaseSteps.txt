@@ -1,0 +1,93 @@
+release 6.1.0.Beta4..:
+
+xx. > cd /home/kiereleaseuser/droolsjbpm (change directory to reps)
+xx. > stop all JBoss and Tomcat instances on hp-dl380pg8-01.lab.eng.brq.redhat.com
+xx. > remove all /tmp/*.jar to prevent false alarms when executing the unit tests
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > gitall checkout master (checks out all branches to master branch, as the future r6.1.0.Beta4 will be a "copy" of master)
+xx. > gitall fetch origin (fetches all updates of all reps from origin)
+xx. > gitall rebase origin/master master (rebases origin/master onto master)
+xx. > mnvallCleanTests (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt )
+xx. > downgraded (because of build errors during kie-eap-integration, ip-boms declare <artifactId>jboss-jacc-api_1.4_spec</artifactId>, not 1.5 )
+      
+      <!-- security -->
+      <dependency>
+        <groupId>org.jboss.spec.javax.security.jacc</groupId>
+        <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+        <version>${version.org.jboss.spec.javax.security.jacc}</version>
+        <scope>provided</scope>
+      </dependency>
+      to 
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>  in droolsjbpm-integration/kie-remote/kie-services-remote/pom.xml
+
+      <dependency>
+        <groupId>org.jboss.spec.javax.security.jacc</groupId>
+        <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+        <version>${version.org.jboss.spec.javax.security.jacc}</version>
+        <scope>provided</scope>
+      </dependency>
+      to 
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>  in jbpm/jbpm-human-task/jbpm-human-task-core/pom.xml
+
+xx. > repeated mvnallCleanTests (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt )
+xx. > sh /home/kiereleaseuser/droolsjbpm/scripts/01_copyArtifactsAndFailedUnitTests.sh (copies all artefacts and failed unit tests to a /var/jbpmartifacts/master/6.1.0.Beta4
+xx. > sanity checks
+xx. > gitall checkout -b r6.1.0.Beta4 (creates and checks out to r6.1.0.Beta3 branches)
+xx. > create new versions on JIRA (Drools, Guvnor, Optaplanner and jBPM) since the local branch is created - "without release date"
+xx. > mvnallClean (executes /hoem/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean)
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.1.0-SNAPSHOT 6.1.0.Beta4 6.1.0-SNAPSHOT 6.1.0.Beta4 (upgrades release version)
+xx. > mvnallCleanInstall (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -DskipTests)
+xx. > doesn't build after the version upgrade - UF has to be released as one commit is missing
+xx. > gitall add . : add all changes that have been made related to the version upgrade (assure before that there are no during the build generatet new files or diretories - these haven't to be added)
+xx. > cd kie-wb-distribution
+xx. > git stash (to stash all changes after the version update)
+xx. > git pull origin master (to get the commit https://github.com/droolsjbpm/kie-wb-distributions/commit/1eed43962 that fixes the deployment problem on AS7)
+xx. > git stash apply (to put in the staging area again all stashed changes)
+xx. > change in droolsjbpm/droolsjbpm-build-bootstrap/pom.xml <version.org.uberfire>0.4.0.Beta4</version.org.uberfire> to <version.org.uberfire>0.4.0.Beta5</version.org.uberfire> [new relased version of UF]
+xx. > mvnallCleanInstall (to check if everything builds)
+xx. > copy all artifacts to http://hp-dl380pg8-01.lab.eng.brq.redhat.com/jbpm-artifacts/master/6.1.0.Beta4/ using the script /home/kiereleaseuser/daily-build/releases/scripts/01_copyArtifactsAndFailedUnitTests.sh
+xx. > copy /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Beta4/docs_jboss_org to /home/kiereleaseuser/Release/6.1.0.Beta4/droolsjbpm-uber-distribution
+xx. > copy /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.1.0.Beta4/download_jboss_org to /home/kiereleaseuser/Release/6.1.0.Beta4/droolsjbpm-uber-distribution
+xx. > add /home/kiereleaseuser/droolsjbpm/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.1.0.Beta4.zip to /home/kiereleaseuser/Release/6.1.0.Beta4/droolsjbpm-uber-distribution/download_jboss_org
+xx. > mvnallClean (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean)
+xx. > gitall commit -m "upgrade to 6.1.0.Beta4" : commits the version changes on the branches
+xx. > gitall status : control if there is a lost commit and if you're on the right branches
+xx. > gitall tag -l : checks  all the tags (to check which tags are existing)
+xx. > gitall tag -a 6.1.0.Beta4 -m "Tagging 6.1.0.Beta4"
+xx. > gitall tag -l : checks  all the tags (to check if the tags were created)
+xx. > go to Nexus, menu item Staging repositories, drop all your old staging repositories
+xx. > mvnallCleanDeploy (executes sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/mvn-all.sh clean deploy -Dfull -DskipTests" --> deploys everything to Nexus - (10:45 -->  hrs))
+xx. > staging repository on Nexus: [jboss-releases-staging-profile-3298]
+xx. > close the repository on Nexus : close ( as discription edit the realease name [6.1.0.Beta4] )
+xx. > gitall tag -l : checks  all the tags
+xx. > release repository on Nexus 
+xx. > gitall push origin 6.1.0.Beta4 [pushes the tag 6.1.0.Beta4 to the blessed repository]
+xx. > upload zips and docs to http://filemngmt.jboss.org
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.1.0.Beta4: updates link to the right directories on filemngmt.jbos.org
+xx. > enter release date on JIRA (Drools, Guvnor, Optaplanner and jBPM) --> 27.05.2014
+xx. > sh droolsjbpm-build-bootstrap/script/git-checkout-all.sh master master : switch back from release branch to master branch
+xx. > downgrade (because of build errors during kie-eap-integration, ip-boms declare <artifactId>jboss-jacc-api_1.4_spec</artifactId>, not 1.5 ) and push to origin master
+      
+      <!-- security -->
+      <dependency>
+        <groupId>org.jboss.spec.javax.security.jacc</groupId>
+        <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+        <version>${version.org.jboss.spec.javax.security.jacc}</version>
+        <scope>provided</scope>
+      </dependency>
+      to 
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>  in droolsjbpm-integration/kie-remote/kie-services-remote/pom.xml
+
+      <dependency>
+        <groupId>org.jboss.spec.javax.security.jacc</groupId>
+        <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+        <version>${version.org.jboss.spec.javax.security.jacc}</version>
+        <scope>provided</scope>
+      </dependency>
+      to 
+      <artifactId>jboss-jacc-api_1.4_spec</artifactId>  in jbpm/jbpm-human-task/jbpm-human-task-core/pom.xml
+
+
+
+
+

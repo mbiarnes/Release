@@ -1,0 +1,21 @@
+Zanata for 6.2.0.Beta3
+
+> git checkout -b zanataBeta3 master
+
+                         mvn zanata:pull-module | mvn replacer:replace -N | mvn clean install -Dfull -DskipTests | git add (changes) | git commit -m "Zanata 6.2.0.Beta3 changes" | git push origin <commitId>:master
+kie-uberfire-extensions: x                        x                         x                                      added /org.kie.uberfire to .gitignore                            x            
+guvnor:                  x                        x                         x                                      no changes          no changes                                   no changes
+kie-wb-common:           x                        x                         x                                      x                   x                                            x       
+jbpm_form_modeler:       x                        x                         x                                      added /org.jbpm to .gitignore                                    x
+drools-wb:               x                        x                         x                                      no changes          no changes                                   no changes
+jbpm-designer:           x                        x                         x                                      x                   x                                            x  
+jbpm-console-ng:         x                        x                         x                                      added /org.jbpm to .gitignore                                    x 
+dashbuilder:             x                        x                         x                                      x                   x                                            x 
+jbpm-dashboard:          x                        x                         x                                      x                   x                                            x
+kie-wb-distributions:    x                        x                         x                                      x                   x                                            x
+uberfire:                x                        x                         x                                      no changes          no changes                                   no changes      
+             
+             
+                         
+       
+           

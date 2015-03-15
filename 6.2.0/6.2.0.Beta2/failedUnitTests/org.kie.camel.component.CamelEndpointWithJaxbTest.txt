@@ -1,0 +1,68 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.camel.component.CamelEndpointWithJaxbTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 1.407 sec <<< FAILURE! - in org.kie.camel.component.CamelEndpointWithJaxbTest
+testQuery(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.534 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testProcess(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.161 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testInsertElements(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.131 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testSessionInsert(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.144 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testSessionModify(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.113 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testProcessInstanceSignalEvent(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.112 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testSessionGetObject(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.101 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+
+testSessionRetractObject(org.kie.camel.component.CamelEndpointWithJaxbTest)  Time elapsed: 0.094 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.generateKieModuleMetaInfo(KieMetaInfoBuilder.java:66)
+	at org.drools.compiler.kie.builder.impl.KieMetaInfoBuilder.writeKieModuleMetaInfo(KieMetaInfoBuilder.java:39)
+	at org.drools.compiler.kie.builder.impl.KieBuilderImpl.buildAll(KieBuilderImpl.java:179)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.registerKnowledgeRuntime(CamelEndpointWithJaxbTest.java:505)
+	at org.kie.camel.component.CamelEndpointWithJaxbTest.configureDroolsContext(CamelEndpointWithJaxbTest.java:399)
+

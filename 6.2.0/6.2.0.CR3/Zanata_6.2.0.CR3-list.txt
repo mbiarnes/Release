@@ -1,0 +1,24 @@
+Zanata for 6.2.0.CR3
+
+
+                         mvn zanata:pull-module | mvn replacer:replace -N | mvn native2ascii:native2ascii | mvn clean install -Dfull -DskipTests | mvn clean | git add (changes) | git commit -m                  | git pull --rebase
+                                                                                                                                                                                 | "Zanata changes for 6.2.0.CR3" | origin 6.2.x & push
+
+kie-uberfire-extensions: done                     no changes                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  no changes                             no changes  no changes         no changes                       no changes   
+guvnor:                  done                     done                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  done                                   done        done               done                             done
+kie-wb-common:           done                     done                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  done                                   done        done               done                             done
+jbpm_form_modeler:       done                     done                      done                            done                                   done        done               done                             done
+drools-wb:               done                     done                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  done                                   done        done               done                             done
+jbpm-designer:           done                     done                      done                            -------------------------------------------------------------------------------------------------------------------------
+cd jbpm-designer-api:    -------------------------done                      ------------------------------  -------------------------------------------------------------------------------------------------------------------------
+cd ..                    ---------------------------------------------------------------------------------  done                                   done        done               done                             done   
+jbpm-console-ng:         done                     done                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  done                                   done        done               done                             done
+dashbuilder:             done                     done                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  done                                   done        done               done                             done
+jbpm-dashboard:          done                     no changes                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  no changes                             no changes  no changes         no changes                       no changes
+kie-wb-distributions:    done                     done                      done                            done                                   done        done               done                             done        
+uberfire:                done  by Manstis         ---                       ---                             ---                                    ---         ---                ---                              ---
+             
+             
+                         
+       
+           

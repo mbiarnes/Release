@@ -1,0 +1,51 @@
+release drools_5.6.0.Final ..: 
+
+
+xx. > created a dir drools_5.6.x and cloned all repositories
+xx. > git checkout <branch> individually for each project to fetch the right branches	
+      list of reporitories
+      droolsjbpm-build-bootstrap      5.6.x
+      droolsjbpm-knowledge            5.6.x
+      drools                          5.6.x
+      optaplanner                     5.6.x
+      jbpm                            5.5.x
+      droolsjbpm-integration          5.6.x
+      guvnor                          5.6.x
+      droolsjbpm-tools                5.6.x
+      droolsjbpm-build-distribution   5.6.x
+      jbpm-form-builder               5.5.x
+xx. > sh droolsjbpm-build-bootstrap/script/git-all.sh checkout -b r5.6.0.Final : created a release branch for each project [jbpm and jbpm-form-builder have to be renamed by git branch -m r5.6.0.Final r5.5.0.Final]
+xx. > sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult : for all projects! checks if everything builds and if no errors occur during the test
+xx. > check testResult to determine unit-tests that failed
+xx. > gitall status : to see the status and branches of every project
+xx. > sanity checks
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 5.6.0-SNAPSHOT 5.6.0.SNAPSHOT 5.6.0.Final 5.5.0.Final 5.5.0-SNAPSHOT 5.5.0.SNAPSHOT 5.5.0.Final 5.5.0.Final
+xx. > check if every 5.6.0-SNAPSHOT was changed to 5.5.0.Final (jbpm 5.5.0-SNAPSHOT to 5.5.0.Final)
+xx. > sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -DskipTests 
+xx. > sh droolsjbpm-build-bootstrap/script/git-all.sh add : add all changes that have been made related to the version upgrade
+xx. > sh droolsjbpm-build-bootstrap/script/git-all.sh commit -m "upgrade to 5.6.0.Final" : commits the version changes on the branches - jbpm =  commit -m "upgrade to 5.5.0.Final"
+xx. > sh droolsjbpm-build-bootstrap/script/git-all.sh status : control if there is a lost commits and if you're on the right branches
+
+      commit 3d883bc962b8fbb07e358fd51d298ae39d1bab87
+      Author: kiereleaseuser <kiereleaseuser@gmail.com>
+      Date:   Fri Jan 10 06:40:30 2014 -0500
+
+      updated compatibility-matrix
+
+xx. > sh droolsjbpm-build-bootstrap/script/release/git-all.sh tag -a 5.6.0.Final -m "5.6.0.Final" for all projects individually: creates a tag for the release versions locally
+      jbpm and jbpm-form-modeler has to be sh droolsjbpm-build-bootstrap/script/release/git-all.sh tag -a 5.5.0.Final -m "5.5.0.Final"
+xx. > gitall tag -l : checks  all the tags
+    xx. > go to Nexus, menu item Staging repositories, drop all your old staging repositories
+xx. > sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean deploy -Dfull -DskipTests --> deploys everything to Nexus
+xx. > do sanity check again downloading the *zip's and *war's from Nexus
+xx. > close the repository on Nexus : close (as discription edit the realease name)
+xx. > sh droolsjbpm-build-bootstrap/script/release/git-push-tag-all.sh 5.6.0.Final 5.5.0.Final: push local TAG(s) to blessed repository
+xx. > git push origin 5.5.0.Final for jbpm-form-modeler
+xx. > release repository on Nexus 
+xx. > sh droolsjbpm-build-bootstrap/script/git-checkout-all.sh master master master : switch back from release branch to master branch
+xx. > upload zips and docs to http://filemngmt.jboss.org
+
+
+
+xx. > create new versions on JIRA (Drools, Guvnor, Optaplanner and jBPM)
+

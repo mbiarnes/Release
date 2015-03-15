@@ -1,0 +1,30 @@
+release 6.0.1.Final ..: 
+
+xx. > gitall pull 6.0.x (SNAPSHOT version is 6.0.1-SNAPSHOT)[uberfire is 0.3.0-SNASPHOT]
+xx. > mvn clean install -Dfull -DskipTests -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory [to see if everything is still building and there are no memory leaks]
+xx. > mvn clean install -Dfull -DskipTests worked without the -Dgwt option
+xx. > gitall checkout -b r6.0.1.Final : creates a new branch for each project and moves to it. ATTENTION: for uberfire project it has to be done separately as it is r0.3.1.Final
+xx. > mvnall clean install -Dfull -Dmaven.test.failure.ignore=true > testResult : for all projects! checks if everything builds and if no errors occur during the test
+xx. > sanity checks
+xx. > gitall status : to see the status and branches of every project
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.0.1-SNAPSHOT 6.0.1.Final 6.0.1-SNAPSHOT 6.0.1.Final 0.3.0-SNAPSHOT 0.3.1.Final : upgrades the versions on release branches
+xx. > check if every 6.0.1-SNAPSHOT was changed to 6.0.1.Final (uberfire 0.3.0-SNASPHOT to 0.3.1.Final)
+xx. > mvnall clean install -Dfull -DskipTests : builds everything with the new upgraded version without executing all tests
+xx. > gitall add : add all changes that have been made related to the version upgrade
+xx. > gitall commit -m "upgrade to 6.0.1.Final" : commits the version changes on the branches - uberfire has to be > git commit -m "upgrade to 0.3.1.Final"
+xx. > gitall status : control if there is a lost commits and if you're on the right branches
+xx. > sh droolsjbpm-build-bootstrap/script/release/git-tag-locally-all.sh 6.0.1.Final 6.0.1.Final 0.3.1.Final : create a tag for the release versions locally
+xx. > gitall tag -l : checks  all the tags    
+xx. > go to Nexus, menu item Staging repositories, drop all your old staging repositories
+xx. > mvnall clean deploy -Dfull -DskipTests --> deploys everything to Nexus - (4 hrs)
+xx. > do sanity check again downloading the *zip's and *war's from Nexus
+xx. > close the repository on Nexus : close (as discription edit the realease name)
+xx. > sh droolsjbpm-build-bootstrap/script/release/git-push-tag-all.sh 6.0.1.Final 6.0.1.Final 0.3.1.Final : push local TAG(s) to blessed repository
+xx. > release repository on Nexus
+ 
+xx. > sh droolsjbpm-build-bootstrap/script/git-checkout-all.sh master master master : switch back from release branch to master branch
+xx. > upload zips and docs to http://filemngmt.jboss.org
+
+xx. > create new versions on JIRA (Drools, Guvnor, Optaplanner and jBPM)
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.0.0.Final : updates link to the right directories on filemngmt.jbos.org
+

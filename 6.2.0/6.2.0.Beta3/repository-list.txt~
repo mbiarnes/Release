@@ -1,0 +1,21 @@
+                                  unit tests | changed version | mvnallClean install
+                                                                 after version upgrade
+droolsjbpm-build-bootstrap        x            x                 x 
+droolsjbpm-knowledge		  x            x                 x
+drools                            x            x                 x
+optaplanner	                  x            x                 x
+jbpm			          x            x                 x
+droolsjbpm-integration	          x            x                 x
+droolsjbpm-tools		  x            x                 x
+droolsjbpm-build-distribution	  x            x                 x
+kie-uberfire-extensions		  x            x                 x
+guvnor				  x            x                 x
+kie-wb-common			  x            x                 x
+jbpm-form-modeler	          x            x                 x
+drools-wb		          x            x                 x
+jbpm-designer		          x            x                 x
+jbpm-console-ng		          x            x                 x
+dashboard-builder	          x            x                 x
+jbpm-dashboard			  x            x                 
+kie-wb-distributions              x	       x
+ 
