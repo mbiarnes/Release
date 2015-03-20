@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.bpmn2.StandaloneBPMNProcessTest
+-------------------------------------------------------------------------------
+Tests run: 153, Failures: 1, Errors: 0, Skipped: 18, Time elapsed: 33.736 sec <<< FAILURE! - in org.jbpm.bpmn2.StandaloneBPMNProcessTest
+testTimerBoundaryEvent[1](org.jbpm.bpmn2.StandaloneBPMNProcessTest)  Time elapsed: 1.097 sec  <<< FAILURE!
+java.lang.AssertionError: Process instance has not completed. expected null, but was:<WorkflowProcessInstance42 [processId=TimerBoundaryEvent,state=1]>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.jbpm.bpmn2.JbpmBpmn2TestCase.assertProcessInstanceCompleted(JbpmBpmn2TestCase.java:879)
+	at org.jbpm.bpmn2.StandaloneBPMNProcessTest.testTimerBoundaryEvent(StandaloneBPMNProcessTest.java:557)
+

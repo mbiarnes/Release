@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.process.audit.query.AuditQueryTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.505 sec <<< FAILURE! - in org.jbpm.process.audit.query.AuditQueryTest
+unionQueryBuilderTest(org.jbpm.process.audit.query.AuditQueryTest)  Time elapsed: 0.053 sec  <<< FAILURE!
+java.lang.AssertionError: union: duration OR end result expected:<3> but was:<5>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:555)
+	at org.jbpm.process.audit.query.AuditQueryTest.unionQueryBuilderTest(AuditQueryTest.java:506)
+

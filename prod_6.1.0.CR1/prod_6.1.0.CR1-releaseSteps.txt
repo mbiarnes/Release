@@ -1,0 +1,106 @@
+RELEASE 6.2.0.CR4..:
+++++++++++++++++++++
+
+PREPARATION..: 08.01.2015 (first CUT OFF DATE)
+**************
+xx. > Alert the dev mailing list and the IRC channel that releasing starts
+xx. > check if a new version of UF, UF-kie-extension, dashbuilder and JBoss ip-bom is needed
+xx. > do Zanata pulls und push them to the blessed repository
+xx. > stop all JBoss and Tomcat instances and crontab-jobs on hp-dl380pg8-01.lab.eng.brq.redhat.com
+xx. > stop all build jobs in crontab of jbpm-master-build and jbpm-6-0-build
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \ - remove all /tmp/* files to prevent false alarms when executing the unit tests
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > mkdir /home/kiereleaseuser/Release/6.2.0.CR4
+xx. > mkdir /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution
+xx. > mkdir /home/kiereleaseuser/Release/6.2.0.CR4/failedUnitTests
+xx. > go to JIRA and add a new version 6.2.0.CR4 to projects drools, jBPM, guvnor and optaplanner and release them without date 
+
+Releasing I..: 08.01.2015
+**************
+xx. > cd /home/kiereleaseuser/droolsjbpm/6.2.x/
+xx. > gitall pull origin [update 6.2.x branch and other branches to most recent commits]
+xx. > gitall rebase origin/6.2.x 6.2.x [rebases origin/master on 6.2.x]
+xx. > gitall checkout -b r6.2.0.CR4 6.2.x [makes an own branch r6.2.0.CR4 based on 6.2.x]
+xx. > mvnallCleanTests (sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt") [builds with executing unit tests and smoke tests]
+
+Releasing II..: 09.01.2015
+**************
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/copyReleaseArtifacts.sh with 6.2.0.CR4 as new release name, droolsjbpm/6.2.x as artifacts source, 6.2.0.CR3 as directory to delete
+      and 6.2.x as path where the artifacts have to be stored
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/copyReleaseFailedUnitTests.sh (copies all failed unit tests and smoke tests)
+xx. > cp -r /var/jbpm-artifacts/6.2.x/6.2.0.CR4/failedUnitTests/* /home/kiereleaseuser/Release/6.2.0.CR4/failedUnitTests/
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0-SNAPSHOT/docs_htdocs /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0-SNAPSHOT/downloads_htdocs /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution
+xx. > cp /home/kiereleaseuser/droolsjbpm/6.2.x/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.2.0-SNAPSHOT.zip /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution/downloads_htdocs/drools/release/6.2.0-SNAPSHOT
+xx. > sh /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.2.0-SNAPSHOT 6.2.0.CR4 6.2.0-SNAPSHOT 6.2.0.CR4 (to change the version)
+xx. > adjust the property of last released version in droolsjbpm-build-bootstrap parent pom to 6.2.0.CR4
+xx. > mvnall clean [to remove all /target directories]
+xx. > check if there are still 6.2.0-SNAPSHOT versions
+xx. > mvnallCleanInstall
+xx. > meanwhile: sanity checks & deployment of artifacts
+xx. > gitall add . 
+xx. > gitall commit -m "upgrade to 6.2.0.CR4"
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/copyReleaseArtifacts.sh with 6.2.0.CR4 as new release name, droolsjbpm/6.2.x as artifacts source, 6.2.0.CR4 as directory to delete
+      and 6.2.x as path where the artifacts have to be stored
+xx. > cp -r /home/kiereleaseuser/Release/6.2.0.CR4/failedUnitTests/* /var/jbpm-artifacts/6.2.x/6.2.0.CR4/failedUnitTests
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0.CR4/docs_htdocs /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution
+xx. > cp -r /home/kiereleaseuser/droolsjbpm/6.2.x/droolsjbpm-build-distribution/droolsjbpm-uber-distribution/target/droolsjbpm-uber-distribution-6.2.0.CR4/downloads_htdocs /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution
+xx. > cp /home/kiereleaseuser/droolsjbpm/6.2.x/kie-wb-distributions/kie-drools-wb/kie-drools-wb-distribution/target/kie-drools-wb-distribution-6.2.0.CR4.zip /home/kiereleaseuser/Release/6.2.0.CR4/droolsjbpm-uber-distribution/downloads_htdocs/drools/release/6.2.0.CR4
+xx. > cherry-picks
+      https://github.com/droolsjbpm/kie-wb-common/commit/6d82b3807
+      https://github.com/droolsjbpm/kie-wb-common/commit/e360a0848
+      https://github.com/droolsjbpm/jbpm/commit/c5650d28a1df119fc24a47061781051a1d4446f7
+      https://github.com/droolsjbpm/jbpm/commit/9b300b36d72def785716330f7d578f9521fb2cdc
+      https://github.com/droolsjbpm/jbpm/commit/b4b07e8b9dc9d960d2d74fb74b901359565595fc
+      UF updated to 0.5.0.CR10
+xx. > mvnallCleanInstall
+xx. > sh /home/kiereleaseuser/daily-build/releases/scripts/copyReleaseArtifacts.sh with 6.2.0.CR4 as new release name, droolsjbpm/6.2.x as artifacts source, 6.2.0.CR4 as directory to delete
+      and 6.2.x as path where the artifacts have to be stored
+xx. > cp -r /home/kiereleaseuser/Release/6.2.0.CR4/failedUnitTests/* /var/jbpm-artifacts/6.2.x/6.2.0.CR4/failedUnitTests
+xx. > gitall tag -l : checks  all the tags (to check which tags are existing)
+xx. > gitall tag -a 6.2.0.CR4 -m "Tagging 6.2.0.CR4"
+
+Releasing III..: 12.01.2015
+***************
+xx, > mvnallCleanDeploy 
+xx. > Repository jboss_releases_staging_profile-4613 (JBoss Releases Staging Profile)
+      Created	Monday, January 12, 2015 10:22:29 CET (GMT+0100)
+      Updated	Monday, January 12, 2015 10:22:29 CET (GMT+0100)
+      Activity	
+      Last operation completed successfully
+      Owner kiereleaseuser (10.34.37.13)
+      User-Agent Apache-Maven/3.0.5 (Java 1.6.0_45; Linux 2.6.32-431.29.2.el6.x86_64)
+xx. > closed release on Nexus
+xx. > release repository on Nexus [jboss_releases_staging_profile-4613]
+xx. > push 6.2.0.CR4 to droolsjbpm (sync-6.2.x-2015.01.09 to jboss-integration was pushed by edson)
+xx. > enter release date on JIRA (Drools, Guvnor, Optaplanner and jBPM) -->
+xx. > mail to bsig and ryan zhang that this release is done
+xx. > upload zips and docs to http://filemngmt.jboss.org
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.2.0.CR4: updates link to the right directories on filemngmt.jboss.org
+
+Releasing IV..: 13.01.2015
+*************** 
+
+xx. > actualize drools and optaplanner website
+xx. > mvnall clean
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [to delete all tmp-files the kiereleaseuser left durng this release]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
