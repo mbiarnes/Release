@@ -1,0 +1,76 @@
+RELEASE sync-6.2.x-2015.05.07..:
+++++++++++++++++++++
+
+PREPARATION/TAGGING..: 07.05.2015 (CUT OFF DATE)
+*********************
+xx. > Alert the dev mailing list and the IRC channel that releasing starts
+xx. > check if a new version of UF, UF-kie-extension, dashbuilder and JBoss ip-bom is needed
+xx. > do Zanata pulls und push them to the blessed repository
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > mkdir /home/kiereleaseuser/Release/sync-6.2.x-2015.05.07
+xx. > cd /home/kiereleaseuser/droolsjbpm
+xx. > gitall fetch origin
+xx. > gitall rebase origin/6.2.x 6.2.x
+xx. > gitall status [to check if there are some directories in the "file changed" area"
+xx. > gitall checkout -b bsync-6.2.x-2015.05.07 6.2.x
+xx. > check the BZ [git log -5 --pretty=format:%h--%s--%an] and http://goo.gl/59FoTQ
+      
+      kie-wb-distributions..:
+      c5a0a3e--BZ-1190751: now if the path is a file, it opens it--Alexandre Porcelli - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218301
+      
+      dashboard-builder..:
+      3d1dec3--BZ 1212185 - Login with user without predefined roles causes infinite redirect loop--David Gutierrez - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1212185
+      
+      uberfire..:
+      e5bccf1--including file/directory check to api--Alexandre Porcelli - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218301
+      dfd356a--Prepare for 0.5.4.Final release--Alexandre Porcelli (for releasing 0.5.4.Final)
+      
+      uberfire-extensions..:
+      6f2fda1--BZ1218450: UF-180: Configurable Workbench - Screen Plugin Title Issue--ederign - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218450
+      7dbd16e--Prepare for 0.5.4.Final release--Alexandre Porcelli (for releasing 0.5.4.Final)
+      
+      droolsjbpm-integration..:
+      3aba1a7--BZ-1214927: adding test for decision tables in spreadsheet--Karel Suta - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217296
+      
+      drools-wb..:
+      c4346d0--Fix for BZ-1217108/1217248: "migration tool doesn't convert java.text.SimpleDateFormat correctly". (cherry picked from commit a9a8f00)--Jan Schatteman - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217248
+      442caae--Fix for BZ-1217113/1217254: "migration tool makes the disabled rule available again". Disabled assets are skipped. (cherry picked from commit a82b649)--Jan Schatteman - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217254
+      16b697f--Additionnal fix for BZ-1217117/1217255: "migration tool generates non-escaped chars that cause the whole exported package empty". (cherry picked from commit 8acd3d -- Jan Schatteman - - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217255
+      3b3d51c--Fix for BZ-1217117/1217255: "migration tool generates non-escaped chars that cause the whole exported package empty". (cherry picked from commit 1c7ff68)--Jan Schatteman - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217255
+      
+      drools..:
+      5063168--BZ1218308: [GSS](6.1.z) Non existing imports in rdrl files prevents the rule to be opened in Business Central--Michael Anstis - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218308
+      ceaf178--BZ1218308: [GSS](6.1.z) Non existing imports in rdrl files prevents the rule to be opened in Business Central--Michael Anstis - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218308
+      624d4ec--BZ1218308: [GSS](6.1.z) Non existing imports in rdrl files prevents the rule to be opened in Business Central. Remove unused logging.--Michael Anstis - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218308
+      bc0b0e3--BZ1218308: [GSS](6.1.z) Non existing imports in rdrl files prevents the rule to be opened in Business Central. Fix for single-line rules.--Michael Anstis - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1218308
+      7ea6814--[BZ-1208442] during an incremental compilation take the kmodule to be updated directly from the kproject stored inside the kcontainer--Mario Fusco - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217295
+      
+      droolsjbpm-knowledge..:
+      e5a0a8d--[JBPM-4603] allow to optinally pass a ClassLoader to the RuntimeManagerFactory--Mario Fusco - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1210672
+      
+      jbpm-designer..:
+      94b49bc--[GSS] (6.1.z) 'Content' assignment is not preserved in REST Task--Tihomir Surdilovic - BZ: https://bugzilla.redhat.com/show_bug.cgi?id=1217332
+  
+  
+xx. > modify droolsjbpm-build-bootstrap/pom.xml with the right version of UF (0.5.4.Final) and dashbuilder (0.2.2.Final) - git add and git commit the changes
+xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
