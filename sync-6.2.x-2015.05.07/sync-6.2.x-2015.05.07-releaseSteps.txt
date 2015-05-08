@@ -1,7 +1,7 @@
 RELEASE sync-6.2.x-2015.05.07..:
 ++++++++++++++++++++
 
-PREPARATION/TAGGING..: 07.05.2015 (CUT OFF DATE)
+PREPARATION/TAGGING..: 07.05.201519:00 PM (CUT OFF DATE)
 *********************
 xx. > Alert the dev mailing list and the IRC channel that releasing starts
 xx. > check if a new version of UF, UF-kie-extension, dashbuilder and JBoss ip-bom is needed
@@ -54,7 +54,36 @@ xx. > check the BZ [git log -5 --pretty=format:%h--%s--%an] and http://goo.gl/59
   
 xx. > modify droolsjbpm-build-bootstrap/pom.xml with the right version of UF (0.5.4.Final) and dashbuilder (0.2.2.Final) - git add and git commit the changes
 xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt
+xx. > re-branched droolsjbpm-knowledge, drools and jbpm to get latest commit of Mario Fusco
+xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt
 
+TAGGING 07.05.2015..:
+*********************
+xx. > /home/kiereleaseuser/droolsjbpm/daily-build/releases/scripts/copy-artifacts.sh [copies artifacts to hp-dl380pg8-01.lab.eng.brq.redhat.com machine]
+xx. > /home/kiereleaseuser/droolsjbpm/daily-build/releases/scripts/copyFailedUnitTestsWeb.sh [copies failed unit tests to hp-dl380pg8-01.lab.eng.brq.redhat.com machine]
+xx. > gitall tag -a sync-6.2.x-2015.05.07 -m "Tagging sync-6.2.x-2015.05.07"
+xx. > execute the first kie-release-report with /home/kiereleaseuser/droolsjbpm/kie-release-reports/script/infoRelease.sh 
+xx. > cherry-picked https://github.com/droolsjbpm/droolsjbpm-integration/commit/64157e5199bdfba953e25dadc0f5ce17b335eed3 that fixes the only test, that is failing
+xx. > cd droolsjbpm-integration
+xx. > git checkout 6.2.x
+xx. > git fetch origin
+xx. > git rebase origin/6.2.x 6.2.x
+xx. > git log -5 --pretty=oneline [to get the commitId. 64157e5199bdfba953e25dadc0f5ce17b335eed3]
+xx. > git checkout bsync-6.2.x-2015.05.07
+xx. > git cherry-pick -x 64157e5199bdfba953e25dadc0f5ce17b335eed3
+xx. > mvn clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt [to run droolsjbpm-integration with test execution]
+xx. > look at testresult.txt if all tests passed
+xx. > git tag -d sync-6.2.x-2015.05.07 [removes tag sync-6.2.x-2015.05.07 for droolsjbpm-integration]
+xx. > git tag -l "sync-6.2.x-2015.05*" [to check if tag is still there]
+xx. > git log -5 --pretty=oneline [to check if all commits are right there]
+xx. > git tag -a sync-6.2.x-2015.05.07 -m "Tagging sync-6.2.x-2015.05.07"
+xx. > Sanity checks and deploy of created artifacts to EAP 6_4 and Tomcat7
+xx. > gitall push upstream sync-6.2.x-2015.05.07
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+      New tag published: sync-6.2.x-2015.05.07
+      Cut date was 2015.05.07   
+      This tag will be used to build the 6.1.1 patch
+      (more detailed information https://github.com/jboss-integration/kie-release-reports/blob/master/reports/tags/sync-6.2.x-2015.05.07/sync-6.2.x-2015.05.07-1.txt )
 
 
 
