@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.test.timer.concurrent.GlobalTimerServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 63.715 sec <<< FAILURE! - in org.jbpm.test.timer.concurrent.GlobalTimerServiceTest
+testSessionPerProcessInstance(org.jbpm.test.timer.concurrent.GlobalTimerServiceTest)  Time elapsed: 63.371 sec  <<< FAILURE!
+java.lang.AssertionError: Failure, did not finish in time most likely hanging
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.jbpm.test.timer.concurrent.GlobalTimerServiceTest.testSessionPerProcessInstance(GlobalTimerServiceTest.java:130)
+
