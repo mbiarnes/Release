@@ -87,9 +87,11 @@ xx. > gitall log -2 --pretty=oneline (checks the latest commits in all rep. at l
 xx. > gitall tag -l "6.3.*" (checks if the tag is there in every repository)
 xx. > gitall push origin 6.3.0.Beta1 (pushes the TAG to the blessed repository
 xx. > mail to bsig that 6.3.0.Beta1 is available
-xx. > sh /home/kiereleaseuser/droolsjbpm/daily-build/release/scripts/mvArtifactsToFilemgmt.sh to move all artifacts to filemgmt.jboss.org
+xx. > push artifacts to filemgmt.jboss.org
 xx. > edit release date in JIRA
+xx. > sh .droolsjbpm-build-bootstrap/script/release/create-filemgmt_links.sh 6.3.0.Beta1 (update filemgmt latest links) 
 xx. > update drools-web
+xx. > update optaplanner-wb 
 xx. > gitall push origin :r6.3.0.Beta1 (remove r6.3.0.Beta1 branches on blessed repository)
 
 
