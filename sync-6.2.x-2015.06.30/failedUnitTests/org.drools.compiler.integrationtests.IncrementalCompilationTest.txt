@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.drools.compiler.integrationtests.IncrementalCompilationTest
+-------------------------------------------------------------------------------
+Tests run: 27, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.823 sec <<< FAILURE! - in org.drools.compiler.integrationtests.IncrementalCompilationTest
+testChangeParentRule(org.drools.compiler.integrationtests.IncrementalCompilationTest)  Time elapsed: 0.095 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<0>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:555)
+	at org.junit.Assert.assertEquals(Assert.java:542)
+	at org.drools.compiler.integrationtests.IncrementalCompilationTest.testChangeParentRule(IncrementalCompilationTest.java:1445)
+
