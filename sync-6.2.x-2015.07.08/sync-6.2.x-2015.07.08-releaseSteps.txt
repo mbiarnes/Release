@@ -1,7 +1,7 @@
 RELEASE sync-6.2.x-2015.07.08..:
 ++++++++++++++++++++
 
-PREPARATION/TAGGING..: 08.07.2015 (CUT OFF DATE)
+TAGGING..: 08.07.2015 (CUT OFF DATE)
 *********************
 xx. > change java version to 1.6 and maven version to 3.0.5
 xx. > create a local branch based on sync-6.2.x-2015.06.30 tag
@@ -15,12 +15,13 @@ xx. > cherry-pick missing commits to local branch
       droolsjbpm-integration..:
       reverted https://github.com/droolsjbpm/droolsjbpm-integration/commit/08a3c05a
       
-xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt      
-xx. > gitall tag -l "sync-6.2.x-2015.07*" [to check if tag is still there]
+Still to do:      
+xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt (to check if everything builds after cherry pisck and reverts)
+xx. > make available the artifacts to people for smoke testing
+xx. > gitall tag -l "sync-6.2.x-2015.07*" [to check available tags]
 xx. > gitall tag -a sync-6.2.x-2015.07.08 -m "Tagging sync-6.2.x-2015.07.08"
-xx. > gitall push upstream sync-6.2.x-2015.07.08 (pushes the tag to jbos-integration)
+xx. > gitall push upstream sync-6.2.x-2015.07.08 (pushes the tag to jboss-integration)
 xx. > prepare kie-release-reports and generate the hand-off report
-
 
 
 
