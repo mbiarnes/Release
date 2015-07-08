@@ -15,8 +15,18 @@ xx. > cherry-pick missing commits to local branch
       droolsjbpm-integration..:
       reverted https://github.com/droolsjbpm/droolsjbpm-integration/commit/08a3c05a
       
-Still to do:      
+      jbpm-designer..:
+      9e588de617f287ee7118fb06c07988f0061fa0d2 BZ 1233397 -  [GSS] (6.1.z) Attempt to rename file affects the wrong BPM process in BPM Suite 6.1.0 -Tihomir Surdilovic
+      cherry-pciked from https://github.com/droolsjbpm/jbpm-designer/commit/493e41fee
+      
 xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt (to check if everything builds after cherry pisck and reverts)
+
+
+++++++++++++++++
++ still to do: +
+++++++++++++++++
+
+xx. > cherry-pick more commits
 xx. > make available the artifacts to people for smoke testing
 xx. > gitall tag -l "sync-6.2.x-2015.07*" [to check available tags]
 xx. > gitall tag -a sync-6.2.x-2015.07.08 -m "Tagging sync-6.2.x-2015.07.08"
