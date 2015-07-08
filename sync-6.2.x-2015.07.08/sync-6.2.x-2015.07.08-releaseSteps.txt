@@ -1,0 +1,41 @@
+RELEASE sync-6.2.x-2015.07.08..:
+++++++++++++++++++++
+
+PREPARATION/TAGGING..: 08.07.2015 (CUT OFF DATE)
+*********************
+xx. > change java version to 1.6 and maven version to 3.0.5
+xx. > create a local branch based on sync-6.2.x-2015.06.30 tag
+      gitall checkout -b bsync-6.2.x-2015.07.08 sync-6.2.x-2015.06.30
+xx. > cherry-pick missing commits to local branch
+      
+      drools..:
+      514d7e2bd87613cde746f991a639102218498ada -- [BZ-1227866] fix RuleHierarchyComparator -- Mario Fusco
+      cherry-picked from https://github.com/droolsjbpm/drools/commit/e59be95ea0c5412b3aeaf247ef96f21a9679e32d
+      
+      droolsjbpm-integration..:
+      reverted https://github.com/droolsjbpm/droolsjbpm-integration/commit/08a3c05a
+      
+xx. > mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true -U > testResult.txt      
+xx. > gitall tag -l "sync-6.2.x-2015.07*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.2.x-2015.07.08 -m "Tagging sync-6.2.x-2015.07.08"
+xx. > gitall push upstream sync-6.2.x-2015.07.08 (pushes the tag to jbos-integration)
+xx. > prepare kie-release-reports and generate the hand-off report
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

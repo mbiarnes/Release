@@ -1,0 +1,34 @@
+RELEASE sync-6.3.x-2015.07.08..:
+********************************
+
+PREPARATION(Release) ..: 08.07.2015 (CUT OFF DATE 06.07.2015 of community 6.3.x.Beta2)
+************************
+xx. > change java version to 1.7 and maven to 3.2.3
+xx. > git checkout master (twice to assure that all repositories are contemplated)
+xx. > create a local release branch bases on 6.3.x.Beta2 tag
+      gitall chekout -b bsync-6.3.x-2015.07.08 6.3.x.Beta2
+xx. > gitall tag -l "sync-6.2.x-2015.07*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.3.x-2015.07.08 -m "Tagging sync-6.3.x-2015.07.08" [creates a tag]
+xx. > git push upstream sync-6.3.x-2015.07.08
+xx. > do hand-off report with product target 6.2.0.DR1
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
