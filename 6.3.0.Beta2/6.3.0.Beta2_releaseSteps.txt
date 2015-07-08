@@ -1,113 +1,58 @@
 RELEASE 6.3.0.Beta2..:
 ++++++++++++++++++++
 
-PREPARATION/TAGGING..: 03.06.2015
-*********************
+PREPARATION(Release) ..: 03.07.2015
+************************
 xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
 xx. > mkdir /home/kiereleaseuser/Release/6.3.0.Beta2
 xx. > cd /home/kiereleaseuser/droolsjbpm
-xx. > release UF, UF-extension, dashbuilder
 xx. > pull Zanata changes
 
+PREPARATION (Realease) ..: 06.07.2015 CUT OFF DATE
+**************************
+xx. > released
+      errai= 3.2.0.CR1
+      uberfire = 0.7.0.Beta3
+      uberfire-extensions = 0.7.0.Beta3
+      dashbuilder = 0.3.0.Beta2
+xx. > git fetch origin
+xx. > git rebase origin/master master
+xx. > git checkout -b r6.3.0.Beta2 master (creates a local branch based on master)
+xx. > updated droolsjbpm-build-bootstrap/pom.xml errai, uf and dashbuilder version
+xx. > git add and git commit changes
+xx. > upgrade version: sh droolsjbpm-build-bootstrap/scrip/release/update-version-all.sh 6.3.0.Beta2
+xx. > mvnallCleanTests ("sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt)
+      build after 
+xx. > copy artifacts to hp-server: sh $HOME/droolsjbpm/daily-build/release/scripts/copyArtifacts.sh 
+xx. > copy failed unit tests to hp-server and to %HOME/Release/6.3.0.Beta2: sh $HOME/droolsjbpm/daily-build/release/scripts/copyFailedUnitTestsWeb.sh
+xx. > mvnall clean (to get rid of /target directories
 
-
-
-
-
-
-
-
-xx. > gitall checkout master
-xx. > gitall fetch origin
-xx. > gitall rebase origin/master master
-xx. > gitall status [to check if there are some directories in the "file changed" area"
-xx. > gitall checkout -b r6.3.0.Beta2 master
-xx. > modify droolsjbpm-build-bootstrap/pom.xml with the right version of UF (...) and dashbuilder (...) and errai (...) - git add and git commit the changes
-xx. > mvn clean installed uberfire and uberfire-extensions .... to have it in the local .m2
-xx. > UF had to be released (it was closed)
-
-
-
-
-xx. > gitall push origin r6.3.0.Beta2 (pushes the release branches to the blessed repo)
-xx. > released without date JIRA projects (optaplanner, jbpm, drools and guvnor) and created a new 6.3.0.Beta3 one
-xx. > mvnall clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt
-
-
-xx. > released dashbuilder 0.3.0.Beta1
-xx. > changed droolsjbpm-build-bootstrap/pom.xml - upgraded dashbuilder
-xx. > mvnall clean install -Dfull -Dmaven.test.failure.ignore=true >> testResult.txt
-xx. > /home/kiereleaseuser/droolsjbpm/daily-build/releases/scripts/copy-artifacts.sh [copies artifacts to hp-dl380pg8-01.lab.eng.brq.redhat.com machine]
-xx. > /home/kiereleaseuser/droolsjbpm/daily-build/releases/scripts/copyFailedUnitTestsWeb.sh [copies failed unit tests to hp-dl380pg8-01.lab.eng.brq.redhat.com machine]
-xx. > cd droolsjbpm-build-bootstrap
-xx. > git status (only droolsjbpm-build-bootstrap/script/repository-list.txt is changed) 
-xx. > git checkout -- droolsjbpm-build-bootstrap/script/repository-list.txt (chnages are re-verted)
-
-VERSION CHANGE ..: 04.06.2015
-*****************
-xx. > mvnall clean (to clean all directories from /target)
-xx. > find . -type d -name "target" [to find /target directories that were not cleaned]
-xx. > find . -type d -name "target" -exec rm -rf {} \; [removes all remaining target directories]
-xx. > sh /home/kiereleaseuser/droolsjbpm/droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.3.0.Beta1
-xx. > check if there are still 6.3.0-SNAPSHOTs available somewhere and fix them 
-xx. > grep -R --exclude-dir=target --exclude-dir=forks --exclude-dir=.idea --exclude-dir=kie-release-reports --exclude-dir=daily-build --exclude-dir=testResults --exclude=*.iml '6.3.0-SNAPSHOT'
-xx. > 6.3.0-SNAPSHOTS changed manually in
-      .jbpm/jbpm-human-task/jbpm-human-task-performance/pom.xml (module jbpm-human-task-performance not buid)
-      .jbpm-designer/jbpm-designer-utilities/pom.xml (modile jbpm-designer-utilities not biuld)
-      .droolsjbpm-integration/kie-remote/kie-remote-ws/kie-remote-ws-gen-wsdl/pom.xml (module kie-remote-ws-gen-wsdl not build)
-      .droolsjbpm-integration/kie-server-parent/kie-server-tests/kie-server-integ-tests-common/src/test/filtered-resources/kjars-sources/definition-project/pom.xml (test)
-      .droolsjbpm-integration/kie-server-parent/kie-server-tests/kie-server-integ-tests-drools/src/test/filtered-resources/kjars-sources/definition-project/pom.xml (test)
-      .droolsjbpm-integration/kie-server-parent/kie-server-tests/kie-server-integ-tests-jbpm/src/test/filtered-resources/kjars-sources/definition-project/pom.xml (test)
-      .drools/kie-maven-plugin-example/pom.xml (module kie-plugin-example is not build)
-xx. > gitall add .
-xx. > gitall status (to check if all version updates are in the commit area)
-xx. > mvnall clean install -Dfull -Dmaven.test.failure.ignore=true >> testResult.txt
-xx. > gitall commit -m "updated to 6.3.0.Beta1" (only if the build was successful)
+RELEASING..: 07.07.2015
+************
+xx. > released without date JIRA projects (optaplanner, jbpm, drools and guvnor) and created a new 6.3.0.CR1 one
 xx. > sanity checks
-xx. > gitall tag -l "6.3.0*" [checks if there re already tags with 6.3.0.]
-xx. > gitall tag -a 6.3.0.Beta1 -m "Tagging 6.3.0.Beta1"
+xx. > gitall add .
+xx. > gitall commit -m "upgraded to 6.3.0.Beta2"
+xx. > gitall tag -l "6.3.0.Beta*" to check existing tags
+xx. > gitall tag -a 6.3.0.Beta2 -m "Tagging 6.3.0.Beta2"
 xx. > mvnall clean deploy -Dfull -DskipTests
-      Repository	jboss_releases_staging_profile-5736 (JBoss Releases Staging Profile)
-      Created	Thursday, June 04, 2015 18:26:00 CEST (GMT+0200)
-      Updated	Thursday, June 04, 2015 18:26:01 CEST (GMT+0200)
+      Repository	jboss_releases_staging_profile-6008 (JBoss Releases Staging Profile)
+      Created	Tuesday, July 07, 2015 12:56:11 CEST (GMT+0200)
+      Updated	Tuesday, July 07, 2015 12:56:12 CEST (GMT+0200)
       Activity	
       Last operation completed successfully
       Owner	kiereleaseuser (213.175.37.10)
-      User-Agent	Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.1.2.el7.x86_64), Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.1.2.el7.x86_64)
-xx. > deploy failed at droolsjbpm-integration because of: https://gist.github.com/mbiarnes/8c2a42b56531a0f20101
-xx. > updated https://github.com/droolsjbpm/droolsjbpm-integration/blob/master/kie-spring/src/test/java/org/kie/spring/CodeVersion.java#L5 to 6.3.0.Beta1
-xx. > dropped the repo on Nexus
-xx. > cd droolsjbpm-integration
-xx. > git tag -d 6.3.0.Beta1 (remove the tag)
-xx. > mvn clean deploy -Dfull -DskipTests (check if it deploys right now)
-xx. > git add . and git commit -m "updated to 6.3.0.Beta1"
-xx. > git tag -a 6.3.0.Beta1 -m "Tagging 6.3.0.Beta1"
-xx. > dropped the test repo on Nexus
-xx. > cd ..
-xx. > mvnall clean deploy -Dfull -DskipTests 
-xx. > Repository	jboss_releases_staging_profile-5739 (JBoss Releases Staging Profile)
-      Created	Thursday, June 04, 2015 19:56:30 CEST (GMT+0200)
-      Updated	Thursday, June 04, 2015 19:56:31 CEST (GMT+0200)
-      Activity	
-      Last operation completed successfully
-      Owner	kiereleaseuser (213.175.37.10)
-      User-Agent	Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.1.2.el7.x86_64), Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.1.2.el7.x86_64)
-      
-RELEASE STAGING REP..: 05.06.2015
-*********************
-xx. > close staging repository on Nexus
-xx. > release staging repository on Nexus
-xx. > gitall status (checks if there is something left)
-xx. > gitall log -2 --pretty=oneline (checks the latest commits in all rep. at least there has to be the upgrade to 6.3.0.Beta1)
-xx. > gitall tag -l "6.3.*" (checks if the tag is there in every repository)
-xx. > gitall push origin 6.3.0.Beta1 (pushes the TAG to the blessed repository
-xx. > mail to bsig that 6.3.0.Beta1 is available
+      User-Agent	Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.7.2.el7.x86_64), Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.7.2.el7.x86_64)
+xx. > close repository on Nexus
+xx. > release repository on Nexus
+xx. > check if artifacts are available
+xx. > gitall push origin 6.3.0.Beta2 (pushed the tag to blessed repository)
+xx. > mail to bsig that 6.3.0.Beta2 is available
 xx. > push artifacts to filemgmt.jboss.org
 xx. > edit release date in JIRA
-xx. > sh .droolsjbpm-build-bootstrap/script/release/create-filemgmt_links.sh 6.3.0.Beta1 (update filemgmt latest links) 
+xx. > sh .droolsjbpm-build-bootstrap/script/release/create-filemgmt_links.sh 6.3.0.Beta2 (update filemgmt latest links)
 xx. > update drools-web
 xx. > update optaplanner-wb 
-xx. > gitall push origin :r6.3.0.Beta1 (remove r6.3.0.Beta1 branches on blessed repository)
 
 
 
