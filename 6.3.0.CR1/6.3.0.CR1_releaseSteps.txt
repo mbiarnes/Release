@@ -1,0 +1,77 @@
+RELEASE 6.3.0.Beta2..:
+++++++++++++++++++++
+
+PREPARATION(Release) ..: 03.07.2015
+************************
+xx. > remove .m2/repository/org/  drools/ + kie/ + guvnor/ + optaplanner/ + jboss/ + jbpm/
+xx. > mkdir /home/kiereleaseuser/Release/6.3.0.Beta2
+xx. > cd /home/kiereleaseuser/droolsjbpm
+xx. > pull Zanata changes
+
+PREPARATION (Realease) ..: 06.07.2015 CUT OFF DATE
+**************************
+xx. > released
+      errai= 3.2.0.CR1
+      uberfire = 0.7.0.Beta3
+      uberfire-extensions = 0.7.0.Beta3
+      dashbuilder = 0.3.0.Beta2
+xx. > git fetch origin
+xx. > git rebase origin/master master
+xx. > git checkout -b r6.3.0.Beta2 master (creates a local branch based on master)
+xx. > updated droolsjbpm-build-bootstrap/pom.xml errai, uf and dashbuilder version
+xx. > git add and git commit changes
+xx. > upgrade version: sh droolsjbpm-build-bootstrap/scrip/release/update-version-all.sh 6.3.0.Beta2
+xx. > mvnallCleanTests ("sh droolsjbpm-build-bootstrap/script/mvn-all.sh clean install -Dfull -Dmaven.test.failure.ignore=true > testResult.txt)
+      build after 
+xx. > copy artifacts to hp-server: sh $HOME/droolsjbpm/daily-build/release/scripts/copyArtifacts.sh 
+xx. > copy failed unit tests to hp-server and to %HOME/Release/6.3.0.Beta2: sh $HOME/droolsjbpm/daily-build/release/scripts/copyFailedUnitTestsWeb.sh
+xx. > mvnall clean (to get rid of /target directories
+
+RELEASING..: 07.07.2015
+************
+xx. > released without date JIRA projects (optaplanner, jbpm, drools and guvnor) and created a new 6.3.0.CR1 one
+xx. > sanity checks
+xx. > gitall add .
+xx. > gitall commit -m "upgraded to 6.3.0.Beta2"
+xx. > gitall tag -l "6.3.0.Beta*" to check existing tags
+xx. > gitall tag -a 6.3.0.Beta2 -m "Tagging 6.3.0.Beta2"
+xx. > mvnall clean deploy -Dfull -DskipTests
+      Repository	jboss_releases_staging_profile-6008 (JBoss Releases Staging Profile)
+      Created	Tuesday, July 07, 2015 12:56:11 CEST (GMT+0200)
+      Updated	Tuesday, July 07, 2015 12:56:12 CEST (GMT+0200)
+      Activity	
+      Last operation completed successfully
+      Owner	kiereleaseuser (213.175.37.10)
+      User-Agent	Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.7.2.el7.x86_64), Apache-Maven/3.2.3 (Java 1.7.0_25; Linux 3.10.0-229.7.2.el7.x86_64)
+xx. > close repository on Nexus
+xx. > release repository on Nexus
+xx. > check if artifacts are available
+xx. > gitall push origin 6.3.0.Beta2 (pushed the tag to blessed repository)
+xx. > mail to bsig that 6.3.0.Beta2 is available
+xx. > push artifacts to filemgmt.jboss.org
+xx. > edit release date in JIRA
+xx. > sh .droolsjbpm-build-bootstrap/script/release/create-filemgmt_links.sh 6.3.0.Beta2 (update filemgmt latest links)
+xx. > update drools-web
+xx. > update optaplanner-wb 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
