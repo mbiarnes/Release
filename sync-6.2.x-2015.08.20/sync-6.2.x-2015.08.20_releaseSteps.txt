@@ -1,0 +1,56 @@
+RELEASE sync-6.2.x-2015.08.20..:
+********************************
+
+PREPARATION(Release) ..: 20.08.2015 (CUT OFF DATE)
+************************
+xx. > change java version to 1.6 and maven to 3.0.5 
+xx. > remove .m2/repository/org/
+      drools
+      jbpm
+      guvnor
+      kie
+      optaplanner
+      dashbuilder
+      jboss/errai
+xx. > stop all containers (if there are running some)
+xx. > git checkout master (twice to assure that all repositories are contemplated)
+xx. > gitall fetch origin
+xx. > gitall rebase origin/6.2.x 6.2.x
+xx. > create a local release branch bsync-6.2.x-2015.08.20 based on 6.2.x
+      gitall checkout -b bsync-6.2.x-2015.08.20 6.2.x
+xx. > change pom 
+      <version.org.uberfire>0.5.7.Final</version.org.uberfire>
+      <version.org.dashbuilder>0.2.2.Final</version.org.dashbuilder>
+xx. > git add and commit changes
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/6.2.x_copyArtifactsTo-kie-releases.sh (copies 6.2.x artifacts to kie-artifacts/<release>/ )
+xx. > sh ../daily-build/release/scripts/copyFailedUnitTestsWebTo-kie-releases.sh (copies the failed unit tests to kie-artifacts/<release>/ )
+xx. > deployement of kie-wb and kie-drools-wb to EAP 6.4 and Tomcat
+xx. > sanity checks
+xx. > gitall tag -l "sync-6.2.x-2015.08*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.2.x-2015.08.20 -m "Tagging sync-6.2.x-2015.08.20" [creates a tag]
+xx. > git push upstream sync-6.2.x-2015.08.20
+xx. > create hand-off report with product target roll up 3 patch 6.2.x -
+      community release 6.2.x, CUT OFF date 2015-08-20
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
