@@ -1,0 +1,11 @@
+jbpm-designer..:
+d970b3eb138768a9d32f19122d937597dd4518d1 update to text annotation - allow them to be part of flow element containers - Tihomir Surdilovic
+af40596d14e9593882f39e47ab14bef58b12555d fix for multi-line names for text annotations - Tihomir Surdilovic
+
+jbpm..:
+53593898dcfa2601711660ab956d6c09ed06d091 BZ 1243597 - allow lanes to have metadata extension (cherry picked from commit ca172a33922d6a795d7356fcd84ef5591ef8a940) - Tihomir Surdilovic
+
+
+
+
+

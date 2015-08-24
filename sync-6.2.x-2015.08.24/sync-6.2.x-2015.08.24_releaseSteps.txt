@@ -1,0 +1,45 @@
+RELEASE sync-6.2.x-2015.08.24..:
+********************************
+
+PREPARATION(Release) ..: 24.08.2015 (CUT OFF DATE)
+************************
+xx. > gitall commit -b bsync-6.2.x-2015.08.24 sync-6.2.x-2015.08.20 [creates a branch based on previous tag]
+xx. > cd jbpm-designer
+xx. > git fetch origin
+xx. > git rebase origin/6.2.x 6.2.x
+xx. > git log -15 --pretty=oneline [to get the commit of tsurdilo:https://github.com/droolsjbpm/jbpm-designer/commit/58cf5634b94d9873ec937f0e8f5b1bdeb6e3fee1] 
+xx. > git checkout bsync-6.2.x-2015.08.24
+xx. > git cherry-pick -x 58cf5634b94d9873ec937f0e8f5b1bdeb6e3fee1
+xx. > cd ..
+xx. > gitall branch [to check if all repos are on the right branch: bsync-6.2.x-2015.08.24]
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/6.2.x_copyArtifactsTo-kie-releases.sh (copies 6.2.x artifacts to kie-artifacts/<release>/ )
+xx. > deployement of kie-wb and kie-drools-wb to EAP 6.4 and Tomcat
+xx. > sanity checks
+xx. > gitall tag -l "sync-6.2.x-2015.08*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.2.x-2015.08.24 -m "Tagging sync-6.2.x-2015.08.24" [creates a tag]
+xx. > git push upstream sync-6.2.x-2015.08.20
+xx. > create hand-off report with product target roll up 3 patch 6.2.x -
+      community release 6.2.x, CUT OFF date 2015-08-20
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: org.drools.compiler.integrationtests.PseudoClockEventsTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.069 sec <<< FAILURE! - in org.drools.compiler.integrationtests.PseudoClockEventsTest
+testEvenFirePseudoClockRuleB(org.drools.compiler.integrationtests.PseudoClockEventsTest)  Time elapsed: 0.648 sec  <<< FAILURE!
+org.mockito.exceptions.verification.TooLittleActualInvocations: 
+agendaEventListener.afterMatchFired(<any>);
+Wanted 4 times:
+-> at org.drools.compiler.integrationtests.PseudoClockEventsTest.testEvenFirePseudoClockRuleB(PseudoClockEventsTest.java:99)
+But was 3 times:
+-> at org.drools.core.event.AgendaEventSupport.fireAfterActivationFired(AgendaEventSupport.java:98)
+
+	at org.drools.compiler.integrationtests.PseudoClockEventsTest.testEvenFirePseudoClockRuleB(PseudoClockEventsTest.java:99)
+
