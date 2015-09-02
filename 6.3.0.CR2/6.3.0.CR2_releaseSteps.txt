@@ -67,7 +67,7 @@ xx. > git add and commit the version upgrades
 xx. > gitall tag -l "6.3.0.*" - shows all existing tags beginning with 6.3.0.
 xx. > gitall tag -a 6.3.0.CR2 -m "Tagging 6.3.0.CR2" [created the tag AFTER adding and commiting]
 xx. > release staging reo on Nexus
-xx. > gitall push upstream 6.3.0.CR2 [pushes the tag to jboss-integration]
+xx. > gitall push origin 6.3.0.CR2 [pushes the tag to jboss-integration]
 xx. > edit date of releases on JIRA
 xx. > sh /home/kiereleaseuser/daily-build/release/scripts/mvArtifactsToFilemgmt.sh [copies artifacts to filemgmt.jboss.org]
 xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.3.0.CR2 
