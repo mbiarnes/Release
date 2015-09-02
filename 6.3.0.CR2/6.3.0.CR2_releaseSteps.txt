@@ -1,12 +1,77 @@
 RELEASE 6.3.0.CR2..:
 ++++++++++++++++++++
 
-PREPARATION (Realease) ..: 06.07.2015 CUT OFF DATE
+xx. > release server kie-releases.lab.eng.brq.redhat.com
+xx. > diecory: /home/kiereleaseuser/droolsjbpm (alias 'github')
+
+PREPARATION (Realease) ..: 28.08.2015 (1st CUT OFF DATE)
 **************************
 
+xx. > releasing jboss-ip-bom 6.0.0.CR28
+xx. > testing droolsjbpm 6.3.x and ip-bom CR28
+xx. > 
+xx. > releasing Uberfire 0.7.0.CR3
+xx. > releasing Uberfire-extensions 0.7.0.CR3
+xx. > releasing dashbuilder 0.3.0.CR3
+xx. > switch JAVA version to 1.7
+xx. > switch Maven version to 3.2.3
+xx. > removed:
+      /home/mbiarnes/.m2/repository/org/drools
+      /home/mbiarnes/.m2/repository/org/guvnor
+      /home/mbiarnes/.m2/repository/org/kie
+      /home/mbiarnes/.m2/repository/org/optaplanner
+      /home/mbiarnes/.m2/repository/org/jbpm
+      /home/mbiarnes/.m2/repository/org/uberfire
+      /home/mbiarnes/.m2/repository/org/jboss/errai
+xx. > ps ax |grep java (to see if there are running any container that may disturb the test execution)
+xx. > rm -rf /home/mbiarnes/droolsjbpm/artifacts (removes artifacts stored from last releasing)
 
-RELEASING..: 
+RELEASING..: 28.08.2015 10:00 AM (CUT OFF DATE)
+************
+xx. > github (changes into droolsjbpm directory)
+xx. > gitall fetch origin (gitall alias for sh ./droolsjbpm-build-bootstrap/script/git-all.sh)
+xx. > gitall rebase origin/6.3.x 6.3.x
+xx. > gitall checkout -b r6.2.0.CR2 6.3.x (branches 6.3.x in r6.3.0.CR2)
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.3.0.CR2 (updates version)
+xx. > check if the is a 6.3.0-SNAPSHOT somehwere left
+      sh droolsjbpm-build-bootstrap/script/release/find-all.sh pom.xml 6.3.0-SNAPSHOT
+xx. > add missing cherry-picks
+      kie-wb-common
+      https://github.com/droolsjbpm/kie-wb-common/commit/590aaae57f6d646d53c4b3c5937c03dbd6d3f826
 
+      cherry-picks of maciejs and rikkola
+
+
+RELEASING..: 31.08.2015 10:00 AM (CUT OFF DATE)
+************
+xx. > 2nd cut of date - rebranched all repos 
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests]
+xx. > error found in dashbuilder 0.3.0.CR3
+xx. > release new dashbuilder version 0.3.0.CR4
+xx. > update pom.xml to use this version
+xx. > remove droolsjbpm/artifacts/*
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests]
+
+RELEASING..: 01.09.2015
+************
+xx. > sanity checks
+xx. > deploy tests to Wildfly, EAP 6.4 and Tomcat 7
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.CR2" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.CR2" to Nexus]
+xx. > git add and commit the version upgrades
+      check if the are some files marked as changed - they should be removed prior to run git add . - this gits adds all
+xx. > gitall tag -l "6.3.0.*" - shows all existing tags beginning with 6.3.0.
+xx. > gitall tag -a 6.3.0.CR2 -m "Tagging 6.3.0.CR2" [created the tag AFTER adding and commiting]
+xx. > release staging reo on Nexus
+xx. > gitall push upstream 6.3.0.CR2 [pushes the tag to jboss-integration]
+xx. > edit date of releases on JIRA
+xx. > sh /home/kiereleaseuser/daily-build/release/scripts/mvArtifactsToFilemgmt.sh [copies artifacts to filemgmt.jboss.org]
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.3.0.CR2 
+xx. > update web sites drools and optaplanner
 
 
 
