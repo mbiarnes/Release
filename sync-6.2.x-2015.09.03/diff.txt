@@ -1,0 +1,27 @@
+jbpm-designer..:
+-------------
+5cf33250a32ecd2f017885f4dbc66abb2a155e85 BZ 1259696 -  Designer can't associate existing elements with swimlane - Tihomir Surdilovic
+cherry-picked from: https://github.com/droolsjbpm/jbpm-designer/commit/3f2eba024090ef08eec5a1362d60af55c08fed17
+
+6b3253ec54054220a010270c82a767656bc55a6e backwards compatibility to pre bpmn2 color spec update - Tihomir Surdilovic
+cherry-picked from: https://github.com/droolsjbpm/jbpm-designer/commit/bd158a8098b6b05fa82d3006337f48acf81ed128
+
+30518280a78547626660ed3a53b91b1c8bb0603a BZ 1259265 - Cannot save imported process with signal catching event - Tihomir Surdilovic
+cherry-picked from: https://github.com/droolsjbpm/jbpm-designer/commit/7c2ffa5356397b238f44a06eb943a5851145ac62
+
+***
+
+guvnor..:
+------
+752afb7e21820ce291f7a0f50cf81cca8620ed33 BZ1259617: [Backport to 6.1.3] NullPointerException during fresh Business Central startup - Michael Anstis
+cherry-picked from: https://github.com/droolsjbpm/guvnor/commit/fce0cd821
+
+
+
+
+
+
+
+
+
+

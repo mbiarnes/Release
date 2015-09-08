@@ -1,0 +1,17 @@
+RELEASE sync-6.2.x-2015.09.02..:
+********************************
+
+PREPARATION(Release) ..: 01.09.2015 (CUT OFF DATE, same CUT OFF as 6.3.0.CR2)
+************************
+xx. > gitall commit -b bsync-6.3.x-2015.09.02 6.3.0.CR2 [creates a branch based on community 6.3.0.CR2 tag]
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-release-6.3.sh (copies 6.3.x artifacts to kie-artifacts/<release>/ )
+xx. > deployement of kie-wb and kie-drools-wb to EAP 6.4 and Tomcat
+xx. > sanity checks
+xx. > gitall tag -l "sync-6.3.x-2015.09*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.3.x-2015.09.02 -m "Tagging sync-6.3.x-2015.09.02" [creates a tag]
+xx. > git push upstream sync-6.3.x-2015.09.02
+xx. > create hand-off report with product target roll up 3 patch 6.2.x -
+      community release 6.3.x, CUT OFF date 2015.08.31
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773

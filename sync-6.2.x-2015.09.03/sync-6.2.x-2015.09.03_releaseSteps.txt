@@ -1,0 +1,56 @@
+RELEASE sync-6.2.x-2015.09.03..:
+********************************
+
+PREPARATION(Release) ..: 2015.08.24 (CUT OFF DATE of prevous tag sync-6.2.x-2015.08.24 that serves as base for this tag) / tag Date: 2015.09.03
+************************
+xx. > gitall commit -b bsync-6.2.x-2015.09.03 sync-6.2.x-2015.08.24 [creates a branch based on previous tag]
+xx. > cd jbpm-designer
+xx. > git fetch origin
+xx. > git rebase origin/6.2.x 6.2.x
+xx. > git log -15 --pretty=oneline [to get the commit of tsurdilo: https://github.com/droolsjbpm/jbpm-designer/commit/bd158a8098b6b05fa82d3006337f48acf81ed128
+                                                                   https://github.com/droolsjbpm/jbpm-designer/commit/7c2ffa5356397b238f44a06eb943a5851145ac62] 
+xx. > git checkout bsync-6.2.x-2015.08.24
+xx. > git cherry-pick -x bd158a8098b6b05fa82d3006337f48acf81ed128
+xx. > git cherry-pick -x 7c2ffa5356397b238f44a06eb943a5851145ac62
+xx. > cd ../guvnor
+xx. > git fetch origint checkout 
+xx. > git rebase origin/6.2.x 6.2.x
+xx. > git log -10 --pretty=oneline [to get the commit of Manstis: https://github.com/droolsjbpm/guvnor/commit/fce0cd821]
+xx. > git checkout bsync-6.2.x-2015.08.24
+xx. > git cherry-pick -x fce0cd821e200335aabeff704dba4633f68bd962
+xx. > cd ..
+xx. > gitall branch [to check if all repos are on the right branch: bsync-6.2.x-2015.09.03]
+
+TAGGING..: 2015.09.08
+**********
+xx. > cherry picked 
+      5cf33250a32ecd2f017885f4dbc66abb2a155e85 BZ 1259696 -  Designer can't associate existing elements with swimlane - Tihomir Surdilovic
+      cherry-picked from: https://github.com/droolsjbpm/jbpm-designer/commit/3f2eba024090ef08eec5a1362d60af55c08fed17
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.2.x.sh (copies 6.2.x artifacts to kie-artifacts/<release>/ )
+xx. > gitall tag -l "sync-6.2.x-2015.09*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.2.x-2015.09.08 -m "Tagging sync-6.2.x-2015.09.08" [creates a tag]
+xx. > git push upstream sync-6.2.x-2015.09.08
+xx. > create hand-off report with product target roll up 3 patch 6.2.x -
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ RELEASE 6.3.0.CR2..:
 xx. > release server kie-releases.lab.eng.brq.redhat.com
 xx. > diecory: /home/kiereleaseuser/droolsjbpm (alias 'github')
 
-PREPARATION (Realease) ..: 28.08.2015 (1st CUT OFF DATE)
+PREPARATION (Realease) ..: 28.08.2015
 **************************
 
 xx. > releasing jboss-ip-bom 6.0.0.CR28
@@ -26,7 +26,7 @@ xx. > removed:
 xx. > ps ax |grep java (to see if there are running any container that may disturb the test execution)
 xx. > rm -rf /home/mbiarnes/droolsjbpm/artifacts (removes artifacts stored from last releasing)
 
-RELEASING..: 28.08.2015 10:00 AM (CUT OFF DATE)
+RELEASING..: 28.08.2015
 ************
 xx. > github (changes into droolsjbpm directory)
 xx. > gitall fetch origin (gitall alias for sh ./droolsjbpm-build-bootstrap/script/git-all.sh)
