@@ -1,0 +1,138 @@
+RELEASE 6.3.0.Final..:
+++++++++++++++++++++
+
+xx. > release server kie-releases.lab.eng.brq.redhat.com
+xx. > diecory: /home/kiereleaseuser/droolsjbpm (alias 'github')
+
+PREPARATION (Realease) ..: 10.09.2015
+**************************
+
+xx. > Zanata changes
+xx. > releasing Uberfire 0.7.0.Final
+xx. > releasing Uberfire-extensions 0.7.0.Final
+xx. > releasing dashbuilder 0.3.0.Final
+xx. > switch JAVA version to 1.7
+xx. > switch Maven version to 3.2.3
+xx. > removed:
+      /home/mbiarnes/.m2/repository/org/drools
+      /home/mbiarnes/.m2/repository/org/guvnor
+      /home/mbiarnes/.m2/repository/org/kie
+      /home/mbiarnes/.m2/repository/org/optaplanner
+      /home/mbiarnes/.m2/repository/org/jbpm
+      /home/mbiarnes/.m2/repository/org/uberfire
+      /home/mbiarnes/.m2/repository/org/jboss/errai
+xx. > ps ax |grep java (to see if there are running any container that may disturb the test execution)
+xx. > rm -rf /home/mbiarnes/droolsjbpm/artifacts (removes artifacts stored from last releasing)
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ps ax |grep java [check if there is some container running, if necessary kill processes]
+xx. > release Drools, Guvnor, jBPM and Optaplanner on 
+      https://issues.jboss.org/plugins/servlet/project-config/DROOLS
+      https://issues.jboss.org/plugins/servlet/project-config/GUVNOR
+      https://issues.jboss.org/plugins/servlet/project-config/JBPM
+      https://issues.jboss.org/plugins/servlet/project-config/PLANNER
+      without date
+
+RELEASING..: 2015.09.15 - Cut Off Date 2015.09.15
+************
+xx. > github (changes into droolsjbpm directory)
+xx. > gitall fetch origin (gitall alias for sh ./droolsjbpm-build-bootstrap/script/git-all.sh)
+xx. > gitall rebase origin/6.3.x 6.3.x
+xx. > gitall checkout -b r6.3.0.Final 6.3.x (branches 6.3.x in r6.3.0.Final)
+xx. > mvnall clean install -Dfull -DskipTests [to generate artifacts for smoke testing still with SNAPSHOTS)
+xx. > new release 0.3.1.Final of dashbuilder as there are three commits that have to go into the dashbuilder release
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.3.0.Final (updates version)
+xx. > check if the is a 6.3.0-SNAPSHOT somehwere left
+      sh droolsjbpm-build-bootstrap/script/release/find-all.sh pom.xml 6.3.0-SNAPSHOT
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests]
+
+
+RELEASING..: 2015.09.16
+************
+xx. > add missing cherry-picks 
+      
+      jbpm:
+      https://github.com/droolsjbpm/jbpm/commit/3121cd2d5e77a799dffd3255134c7564cf174e5c - Maciej Swiderski
+      https://github.com/droolsjbpm/jbpm/commit/7bd3131998c45b142128d5535aee70bb755ebe75 - Mauricio Salatino
+      https://github.com/droolsjbpm/jbpm/commit/13307c95851c2d36f50ccd055241d913d4a06146 - Kris Verlaenen
+
+      droolsjbpm-tools:
+      https://github.com/droolsjbpm/droolsjbpm-tools/commit/6ed5a3be251af79cf04e7bc713f91a5b4f462913 - Bob Brodt
+
+      uberfire:
+      https://github.com/uberfire/uberfire/commit/b76731bc60f3111d15f16d4beb01b3ce9ad61637 - Alexandre Porcelli {this implies a new release of UF and UF ext]
+      
+      uberfire-extensions:
+      https://github.com/uberfire/uberfire-extensions/commit/1e84a66e2 - Eder Ignatovicz {this implies a new release of UF and UF ext.}
+
+      kie-wb-common:
+      https://github.com/droolsjbpm/kie-wb-common/commit/b77f8558627bd6a67b034d86feaad99658912006 - Alexandre Porcelli
+      https://github.com/droolsjbpm/kie-wb-common/commit/68f81e30e2c05be4176a63a05af9fdb235bfdbd0 - Walter Medvedeo
+      
+
+      drools:
+      https://github.com/droolsjbpm/drools/commit/044c6abe46b8a7e7786a12d9902880d5696c090c - Mario Fusco
+      https://github.com/droolsjbpm/drools/commit/9ac3a6dde8e6c46b6923b200aee0a2943bec1f1c - Michael Anstis / Mario Fusco
+      https://github.com/droolsjbpm/drools/commit/4946084c1cc57b0db38f61017cb1fea7d890d025 - Mario Fusco
+
+      droolsjbpm-integration:
+      https://github.com/droolsjbpm/droolsjbpm-integration/commit/123762750d6df781eec54d831147d25f4364a478 - Marco Rietveld
+
+      jbpm-console-ng:
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/a8a9d055789293550de7d8ae86ca7fcbef65c00a - Marco Rietveld
+
+      kie-wb-distribution:
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/1b80d72f89ad54c51b1580986baf7bc56f5bbdd1 - Maciej Swiderski
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/57cf9e76ff11fa35d2f5c95d7dcb0f32e6cbdaa5 - Maciej Swiderski / Marco Rietveld
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/324727e999206522a07b47257909f0f1a9651e65 - Neus Miras
+
+RELEASING ..: 2015.09.18 
+*************
+
+xx. > new version "staging repo" on Nexus for dashbuilder after some changes dasbuilder 0.3.2.Final
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > added the last cherry-pick
+
+      drools:
+      https://github.com/droolsjbpm/drools/commit/b728c2f49 - mario Fusco
+
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > sanity checks
+xx. > deploy tests to Wildfly, EAP 6.4 and Tomcat 7
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
+xx. > gitall tag -l "6.3.0.*" - shows all existing tags beginning with 6.3.0.
+xx. > gitall tag -a 6.3.0.Final -m "Tagging 6.3.0.Final" [created the tag AFTER adding and commiting]
+
+
+xx. > release staging reo on Nexus
+xx. > gitall push origin 6.3.0.Final [pushes the tag to jboss-integration]
+xx. > edit date of releases on JIRA
+xx. > sh /home/kiereleaseuser/daily-build/release/scripts/mvArtifactsToFilemgmt.sh [copies artifacts to filemgmt.jboss.org]
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.3.0.Final 
+xx. > update web sites drools and optaplanner
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

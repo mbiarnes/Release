@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.process.audit.command.AuditCommandsTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 56.048 sec <<< FAILURE! - in org.jbpm.process.audit.command.AuditCommandsTest
+org.jbpm.process.audit.command.AuditCommandsTest  Time elapsed: 56.048 sec  <<< ERROR!
+java.lang.RuntimeException: Cannot start h2 server database
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(InetAddress.java:894)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1286)
+	at java.net.InetAddress.getLocalHost(InetAddress.java:1462)
+	at org.h2.util.NetUtils.getLocalAddress(NetUtils.java:261)
+	at org.h2.server.TcpServer.getURL(TcpServer.java:193)
+	at org.h2.tools.Server.start(Server.java:456)
+	at org.jbpm.bpmn2.JbpmBpmn2TestCase$H2Server.start(JbpmBpmn2TestCase.java:900)
+	at org.jbpm.bpmn2.JbpmBpmn2TestCase.setUpDataSource(JbpmBpmn2TestCase.java:215)
+	at org.jbpm.process.audit.command.AuditCommandsTest.setup(AuditCommandsTest.java:48)
+

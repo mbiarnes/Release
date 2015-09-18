@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+Test set: org.jbpm.memory.MemoryLeakTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 112.046 sec <<< FAILURE! - in org.jbpm.memory.MemoryLeakTest
+org.jbpm.memory.MemoryLeakTest  Time elapsed: 112.046 sec  <<< ERROR!
+java.lang.RuntimeException: can't start h2 server db
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(InetAddress.java:894)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1286)
+	at java.net.InetAddress.getLocalHost(InetAddress.java:1462)
+	at org.h2.util.NetUtils.getLocalAddress(NetUtils.java:261)
+	at org.h2.server.TcpServer.getURL(TcpServer.java:193)
+	at org.h2.tools.Server.start(Server.java:456)
+	at org.jbpm.persistence.util.PersistenceUtil$TestH2Server.start(PersistenceUtil.java:400)
+	at org.jbpm.persistence.util.PersistenceUtil.setupPoolingDataSource(PersistenceUtil.java:198)
+	at org.jbpm.persistence.util.PersistenceUtil.setupWithPoolingDataSource(PersistenceUtil.java:112)
+	at org.jbpm.persistence.util.PersistenceUtil.setupWithPoolingDataSource(PersistenceUtil.java:86)
+	at org.jbpm.memory.MemoryLeakTest.beforeClass(MemoryLeakTest.java:66)
+
