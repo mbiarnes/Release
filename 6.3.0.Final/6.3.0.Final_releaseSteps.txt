@@ -1,12 +1,10 @@
 RELEASE 6.3.0.Final..:
 ++++++++++++++++++++
-
 xx. > release server kie-releases.lab.eng.brq.redhat.com
 xx. > diecory: /home/kiereleaseuser/droolsjbpm (alias 'github')
 
 PREPARATION (Realease) ..: 10.09.2015
 **************************
-
 xx. > Zanata changes
 xx. > releasing Uberfire 0.7.0.Final
 xx. > releasing Uberfire-extensions 0.7.0.Final
@@ -89,7 +87,6 @@ xx. > add missing cherry-picks
 
 RELEASING ..: 2015.09.18 
 *************
-
 xx. > new version "staging repo" on Nexus for dashbuilder after some changes dasbuilder 0.3.2.Final
 xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
  -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
@@ -97,7 +94,7 @@ xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -
 xx. > added the last cherry-pick
 
       drools:
-      https://github.com/droolsjbpm/drools/commit/b728c2f49 - mario Fusco
+      https://github.com/droolsjbpm/drools/commit/b728c2f49 - Mario Fusco
 
 xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
  -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
@@ -106,15 +103,91 @@ xx. > sanity checks
 xx. > deploy tests to Wildfly, EAP 6.4 and Tomcat 7
 xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
        [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
+
+RELEASING..: 2015.09.21
+***********
+xx. > cherry-picked new commits..:
+
+      jbpm-console-ng
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/cfeee282ecbd17a0ef3137e01abae4164bf6e18c - Marco Rietveld
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/9cd147c3cf097f7ca615a8c44ef8b1f7959af1c4 - Marco Rietveld
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/39ffe8a04e41c72421313a2d284275706bfbe136 - Mauricio Salatino
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/caa333a5c17e35e0379e86e47ef83a5819019389 - Neus Miras
+
+xx. > remove all what is in /home/kiereleaseuser/droolsjbpm/artifacts
+xx. > stop all running containers from deploy tests
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+ -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
 xx. > gitall tag -l "6.3.0.*" - shows all existing tags beginning with 6.3.0.
 xx. > gitall tag -a 6.3.0.Final -m "Tagging 6.3.0.Final" [created the tag AFTER adding and commiting]
 
 
-xx. > release staging reo on Nexus
+RELEASING..: 2015.09.22
+************
+xx. > missing commit in dashbuilder
+      dashbuilder:
+      https://github.com/dashbuilder/dashbuilder/commit/d6ae85cfd6e16b3a5f09b58ce31c7c8b47114265 - David Gurierrez
+
+      this implies a new release for dashbuilder 0.3.3.Final on staging repo
+
+xx. > remove all what is in /home/kiereleaseuser/droolsjbpm/artifacts
+xx. > stop all running containers from deploy tests
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx.>  ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true\
+-Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/staging-settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
+
+RELEASING..: 2015.09.23
+************
+xx. > missing commit in uberfire
+      uberfire:
+      https://github.com/uberfire/uberfire/commit/e41913843d222b84d680c369533e0645ba0831b1 - Michael Anstis / Alexandre Porcelli
+
+      this implies a new release for uberfire 0.7.3-Final and uberfire-extensions 0.7.3.Final and dashbuilder 0.3.3.Final on staging repo
+
+xx. > remove all what is in /home/kiereleaseuser/droolsjbpm/artifacts
+xx. > stop all running containers from deploy tests
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx.>  ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true
+-Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/staging-settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository\
+-DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
+
+RELEASING..: 2015.09.25
+************
+
+xx. > missing commit in drools
+      drools:
+      https://github.com/droolsjbpm/drools/commit/a368461aeca783408734dcec150bff742afccf57 - Mario Fusco
+
+xx. > remove all what is in /home/kiereleaseuser/droolsjbpm/artifacts
+xx. > stop all running containers from deploy tests
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx.>  ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/artifacts -Dmaven.test.failure.ignore=true
+-Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -s $HOME/.m2/staging-settings.xml -Dgwt.compiler.localWorkers=3 >> testResult.txt
+       [executes the mvn clean deploy and deploys to a local directory and executes all Unit Tests IMPORTANT: -s $HOME/.m2/staging-settings.xml to use only for using the stage repositories,]
+xx. > ./droolsjbpm-build-bootstrap/script/mvn-all.sh -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository\
+-DrepositoryDirectory=$HOME/droolsjbpm/artifacts -s $HOME/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="KIE 6.3.0.Final" -DstagingProgressTimeoutMinutes=10 
+       [copies all binaries/artifacts in /home/kiereleaseuser/droolsjbpm/artifacts to a staging repository "KIE 6.3.0.Final" to Nexus]
+xx. > gitall tag -l "6.3.0.*" - shows all existing tags beginning with 6.3.0.
+xx. > gitall tag -a 6.3.0.Final -m "Tagging 6.3.0.Final" [created the tag AFTER adding and commiting]
+xx. > release before UF, UF-extensions and dashbuilder
+xx. > release staging reo on Nexus: kie_staging_profile-1010 (KIE Staging Profile)
 xx. > gitall push origin 6.3.0.Final [pushes the tag to jboss-integration]
 xx. > edit date of releases on JIRA
 xx. > sh /home/kiereleaseuser/daily-build/release/scripts/mvArtifactsToFilemgmt.sh [copies artifacts to filemgmt.jboss.org]
-xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.3.0.Final 
+xx. > sh droolsjbpm-build-bootstrap/script/release/create_filemgmt_links.sh 6.3.0.Final
+
+POST_RELEASING..: 2015.09.28
+***************** 
 xx. > update web sites drools and optaplanner
 
 
