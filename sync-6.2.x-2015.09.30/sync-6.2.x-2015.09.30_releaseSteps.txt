@@ -1,0 +1,48 @@
+RELEASE sync-6.2.x-2015.09.30..:
+********************************
+
+REALEASE ..: 2015.09.30 (CUT OFF DATE - based on kie 6.2.x branch)
+************
+xx. > removed:
+      /home/mbiarnes/.m2/repository/org/drools
+      /home/mbiarnes/.m2/repository/org/guvnor
+      /home/mbiarnes/.m2/repository/org/kie
+      /home/mbiarnes/.m2/repository/org/optaplanner
+      /home/mbiarnes/.m2/repository/org/jbpm
+      /home/mbiarnes/.m2/repository/org/uberfire
+      /home/mbiarnes/.m2/repository/org/jboss/errai
+      /home/mbiarnes/.m2/repository/org/dashbuilder
+      /home/mbiarnes/.m2/repository/org/jboss/dashboard-builder
+xx. > change JAVA to 1.6
+xx. > change Maven to 3.0.5
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ps ax |grep java [check if there is some container running, if necessary kill processes]
+xx. > gitall commit -b bsync-6.2.x-2015.09.30 6.2.x [creates a branch based on 6.2.x]
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.2.x.sh (copies 6.2.x artifacts to kie-artifacts/<release>/ )
+xx. > gitall tag -l "sync-6.2.x-2015.09*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.2.x-2015.09.30 -m "Tagging sync-6.2.x-2015.09.30" [creates a tag]
+xx. > git push upstream sync-6.2.x-2015.09.30
+xx. > create hand-off report with product target roll up 3 patch 6.2.x -
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+RELEASE sync-6.3.x-2015.10.01..:
+********************************
+
+SYNC_TAG ..: 2015.10.01 (CUT OFF DATE - based on kie 6.3.x branch)
+*********
+xx. > removed:
+      /home/mbiarnes/.m2/repository/org/drools
+      /home/mbiarnes/.m2/repository/org/guvnor
+      /home/mbiarnes/.m2/repository/org/kie
+      /home/mbiarnes/.m2/repository/org/optaplanner
+      /home/mbiarnes/.m2/repository/org/jbpm
+      /home/mbiarnes/.m2/repository/org/uberfire
+      /home/mbiarnes/.m2/repository/org/jboss/errai
+      /home/mbiarnes/.m2/repository/org/dashbuilder
+      /home/mbiarnes/.m2/repository/org/jboss/dashboard-builder
+xx. > change JAVA to 1.7
+xx. > change Maven to 3.2.3
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ps ax |grep java [check if there is some container running, if necessary kill processes]
+xx. > gitall checkout -b bsync-6.3.x-2015.10.01 6.3.x [creates a branch based on 6.3.x]
+xx. > change Uberfire, UF-extension, Dashbuilder and errai versin in pom to a stable version (not SNAPSHOT)
+      UF & UF-extensions: 0.7.3.Final
+      Dashbuilder: 0.3.3.Final
+      errai: 3.2.0.Final
+xx. > git add and commit changes
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.3.x.sh (copies 6.3.x artifacts to kie-artifacts/<release>/ )
+
+SYNC_TAG..: 2015.10.02
+********
+xx. > cherry picks
+      jbpm-designer:
+      https://github.com/droolsjbpm/jbpm-designer/commit/219fff9a222f637f51577aef8ca685f305143523 - Jeremy Lindop
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt	
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.3.x.sh (copies 6.3.x artifacts to kie-artifacts/<release>/ )
+xx. > release UF / UF-extensions and dashbulder again becasue of some commits
+      
+      git fetch origin/rebase and branch r... branches for UF/UF-ext and dashbuilder
+      UF & UF-extensions
+      mvn -Dfull versions:set -DoldVersion=0.7.4-SNAPSHOT -DnewVersion=0.7.4.Final -DallowSnapshots=true -DgenerateBackupPoms=false
+      dashbuilder
+      mvn -Dfull versions:set -DoldVersion=0.3.4-SNAPSHOT -DnewVersion=0.3.4.Final -DallowSnapshots=true -DgenerateBackupPoms=false
+      
+      UF: jboss_releases_staging_profile-6811 - 0.7.4.Final
+      UF-ext.: jboss_releases_staging_profile-6812 - 0.7.4.Final
+      dashbuilder: jboss_releases_staging_profile-6818 - 0.3.4.Final
+      
+      xx. > mnv clean deploy -Dfull (to Nexus) 
+      xx. > close the reps but don't release them
+
+xx, > cherry-picks
+      kie-wb-distributions
+      https://github.com/droolsjbpm/kie-wb-distributions/commit/08f2b571adc2b31597c436cde48e3bc3f1c673c6 - Neus Miras
+      xx. > mnv clean deploy -Dfull (to Nexus) 
+      xx. > close the reps but don't release them
+
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > build repository
+      mvnall clean install -s $HOME/.m2/staging-settings.xml -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt [important -s $HOME/.m2/staging-settings.xml as the reeases are not closed]
+
+
+
+
+xx. > gitall tag -l "sync-6.3.x-2015.10*" [to check if tag is still there]
+xx. > gitall tag -a sync-6.3.x-2015.10.01 -m "Tagging sync-6.3.x-2015.10.01" [creates a tag]
+xx. > git push upstream sync-6.3.x-2015.10.01
+xx. > create hand-off report with product target 6.2.ER4  -
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+COMMUNITY RELEASE OF fuse-bxms-integ (branch 1.2.x)..:
+****************************************************
+
+
+CREATE_INTEGRATION_PACK..:
+***********************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

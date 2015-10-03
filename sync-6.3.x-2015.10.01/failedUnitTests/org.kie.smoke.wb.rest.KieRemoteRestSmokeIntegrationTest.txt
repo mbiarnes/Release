@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.smoke.wb.rest.KieRemoteRestSmokeIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec <<< FAILURE! - in org.kie.smoke.wb.rest.KieRemoteRestSmokeIntegrationTest
+org.kie.smoke.wb.rest.KieRemoteRestSmokeIntegrationTest  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.AssertionError: Deploy of org.test:kjar:1.0 failed!
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.kie.smoke.wb.util.RestRepositoryDeploymentUtil.waitForDeploymentToFinish(RestRepositoryDeploymentUtil.java:336)
+	at org.kie.smoke.wb.util.RestRepositoryDeploymentUtil.deploy(RestRepositoryDeploymentUtil.java:104)
+	at org.kie.smoke.wb.util.RestRepositoryDeploymentUtil.createRepositoryAndDeployProject(RestRepositoryDeploymentUtil.java:94)
+	at org.kie.smoke.wb.AbstractWorkbenchIntegrationTest.deployJbpmPlayGroundIntegrationTests(AbstractWorkbenchIntegrationTest.java:65)
+	at org.kie.smoke.wb.rest.KieRemoteRestSmokeIntegrationTest.setupDeployment(KieRemoteRestSmokeIntegrationTest.java:133)
+
