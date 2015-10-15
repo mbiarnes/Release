@@ -1,0 +1,54 @@
+RELEASE sync-6.2.x-2015.10.15..:
+********************************
+
+REALEASE ..: 2015.10.15(CUT OFF DATE)
+************
+xx. > removed:
+      /home/mbiarnes/.m2/repository/org/drools
+      /home/mbiarnes/.m2/repository/org/guvnor
+      /home/mbiarnes/.m2/repository/org/kie
+      /home/mbiarnes/.m2/repository/org/optaplanner
+      /home/mbiarnes/.m2/repository/org/jbpm
+      /home/mbiarnes/.m2/repository/org/uberfire
+      /home/mbiarnes/.m2/repository/org/jboss/errai
+      /home/mbiarnes/.m2/repository/org/dashbuilder
+      /home/mbiarnes/.m2/repository/org/jboss/dashboard-builder
+xx. > change JAVA to 1.6
+xx. > change Maven to 3.0.5
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ps ax |grep java [check if there is some container running, if necessary kill processes]
+xx. > gitall clean -d -f [remove leftovers from other branches] 
+xx. > gitall checkout -b bsync-6.2.x-2015.10.15 6.2.x [creates a branch based on 6.2.x]
+xx. > change in kie-parent-metadata
+      uberfire to 0.5.7.Final
+      dashbuilder to 0.2.2.Final
+xx. > build repository
+      mvnall clean install -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.2.x.sh (copies 6.2.x artifacts to kie-artifacts/<release>/ )
+xx. > gitall tag -l "sync-6.2.x-2015.10*" [to check if tag is still there]
+xx. > git-all.sh log --oneline sync-6.2.x-2015.09.30..HEAD [compares the commits of the actual branch (HEAD) with the commits on the previous tag: sync-6.2.x-2015.09.30]
+xx. > gitall tag -a sync-6.2.x-2015.10.15 -m "Tagging sync-6.2.x-2015.10.15" [creates a tag]
+xx. > gitall push upstream sync-6.2.x-2015.10.15 [pushes the tag to jboss-integration]
+xx. > gitall push upstream 6.2.x [pushes the 6.2.x branch to jboss-integration]
+xx. > create hand-off report with product target patch 6.1.4 -
+xx. > update https://bugzilla.redhat.com/show_bug.cgi?id=988773
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
