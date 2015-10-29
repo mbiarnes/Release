@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: org.kie.smoke.wb.rest.GuvnorRestSmokeIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 27.758 sec <<< FAILURE! - in org.kie.smoke.wb.rest.GuvnorRestSmokeIntegrationTest
+testManipulatingRepositoriesAndProjects(org.kie.smoke.wb.rest.GuvnorRestSmokeIntegrationTest)  Time elapsed: 0.012 sec  <<< FAILURE!
+java.lang.AssertionError: UF-Playground Git URL expected:<git://uf-playground> but was:<null>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.kie.smoke.wb.rest.GuvnorRestSmokeIntegrationTest.testManipulatingRepositoriesAndProjects(GuvnorRestSmokeIntegrationTest.java:111)
+

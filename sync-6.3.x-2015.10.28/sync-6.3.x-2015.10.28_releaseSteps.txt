@@ -1,0 +1,80 @@
+RELEASE sync-6.3.x-2015.10.28..:
+********************************
+
+SYNC_TAG ..: 2015.10.28 (CUT OFF DATE - based on kie 6.3.x branch)
+*********
+
+"Released" UF/UF-extand dashbulder..:
+**********************************
+in each repository
+xx. > git fetch origin
+xx. > git rebase origin/<branch> <branch> | UF & UF-ext 0.7.x, dashbuilder 0.3.x 
+xx. > git checkout -b r<branch>.<date> 
+      Uberfire: r0.7.x.20151028
+      Uberfire-extensions: r0.7.x.20151028
+      dashbuilder: r0.3.x.20151028
+xx. > mvn -Dfull versions:set -DoldVersion=0.3.5-SNAPSHOT -DnewVersion=0.3.x.20151028 -DallowSnapshots=true -DgenerateBackupPoms=false |change version (example for dashbulder)
+xx. > mvn -B -e clean deploy -Dfull -T2C -DaltDeploymentRepository=local::default::file:///home/kiereleaseuser/droolsjbpm/forks/dashbuilder/artifacts -Dgwt.memory.settings="-Xmx2g -Xms1g -XX:MaxPermSize=256m -XX:PermSize=128m -Xss1M" -Dgwt.compiler.localWorkers=3 | deploys all binaris to a local directory artifacts (dashbuilder example)
+xx. > cd artifacts
+xx. > mvn -B -e org.sonatype.plugins:nexus-staging-maven-plugin:1.6.5:deploy-staged-repository -DnexusUrl=https://repository.jboss.org/nexus -DserverId=jboss-releases-repository -DrepositoryDirectory=/home/kiereleaseuser/droolsjbpm/forks/dashbuilder/artifacts -s /home/kiereleaseuser/.m2/settings.xml -DstagingProfileId=15c58a1abc895b -DstagingDescription="dashbulder 0.3.x.20151028" -DstagingProgressTimeoutMinutes=10 |creates a staging repo in kie and copies all binaries from artifacts to Nexus, when finishes the staging repository is closed.
+xx. > git tag -a sync-6.3.x.2015.10.28 -m "Tagging sync-6.3.x.2015.10.28" |create a tag thta later will be pushed to jboss-integration
+
+prod tag..:
+********
+xx. > removed:
+      $HOME/.m2/repository/org/drools
+      $HOME/.m2/repository/org/guvnor
+      $HOME/.m2/repository/org/kie
+      $HOME/.m2/repository/org/optaplanner
+      $HOME/.m2/repository/org/jbpm
+      $HOME/.m2/repository/org/uberfire
+      $HOME/.m2/repository/org/jboss/errai
+      $HOME/.m2/repository/org/dashbuilder
+      $HOME/.m2/repository/org/jboss/dashboard-builder
+xx. > change JAVA to 1.7
+xx. > change Maven to 3.2.3
+xx. > find /tmp -maxdepth 1 -user `whoami` -exec rm -rf {} \; [removes all created /tmp/ files by the user]
+xx. > ps ax |grep java [check if there is some container running, if necessary kill processes]
+xx. > gitall checkout -b bsync-6.3.x-2015.10.01 6.3.x [creates a branch based on 6.3.x]
+xx. > change Uberfire, UF-extension, Dashbuilder and errai version in pom to a stable version (not SNAPSHOT)
+      UF & UF-extensions: 0.7.x.20151028
+      Dashbuilder: 0.3.x.20151028
+      errai: 3.2.1.Final
+xx. > git add and commit changes
+xx. > change the version to 6.3.1.20151028
+xx. > sh droolsjbpm-build-bootstrap/script/release/update-version-all.sh 6.3.x.20151028
+xx. > check if all versions changed correctly
+xx. > gitall push upstream bsync-6.3.x-2015.10.28 | pushes the bsync-6.3.x-2015.10.28 branches to jboss-integration for developers
+
+tag..: 2015.10.29
+******
+xx. > build repository
+      mvnall clean install -s $HOME/.m2/settings.xml -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+xx. > sh ../daily-build/release/scripts/copyArtifacts-releases-6.3.x.sh (copies 6.3.x artifacts to kie-artifacts/<release>/ )
+xx. > cherry-picks
+      jbpm-console-ng:
+      https://github.com/droolsjbpm/jbpm-console-ng/commit/c3e3dfad16732080be302d3290ee28bc1ab55c85 Maricio Salatino
+      jbpm:
+      https://github.com/droolsjbpm/jbpm/commit/e77d9c57d Kris Verleanen
+xx. > build repository
+      mvnall clean install -s $HOME/.m2/settings.xml -Dfull -Dproductized -Dmaven.test.failure.ignore=true >> testResult.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
