@@ -1,0 +1,63 @@
+
+**************************************************************
+droolsjbpm-build-bootstrap..:
+c231e05--Change prod to productized in update-version-all.sh for consistency--Michael Biarnes Kiefer
+
+**************************************************************
+drools..:
+83a8cec--DROOLS-951: add missing @Test annotation--Marek Winkler
+
+**************************************************************
+jbpm..:
+7b4254c--BZ-1279821 - Synchronization of a deployment unit between EJB services app and Business Central fails - missing ejb deployment service change--Maciej Swiderski
+394a79a--BZ-1281864 - Marshalling error accessing remote EJB services app with Sybase DB closes #340--Maciej Swiderski
+**************************************************************
+droolsjbpm-integration..:
+594fa3e--BZ-1280313 - Multiple client command execution through SOAP interface does not authenticate correctly closes #238--Marco Rietveld
+576a5c6--BZ-1283208 - KieServerClient JSON marshaling does not work for QueryResults and FactHandles closes #235--Maciej Swiderski
+c4e079a--BZ-1222829 - Rules are not getting fired when JAXB request is sent - support for gdst format and other drools workbench models closes #234--Maciej Swiderski
+24dd658--Upgrade takari-plugin-testing to 2.8.0 to fix failing tests--Petr Siroky
+
+**************************************************************
+kie-uberfire-extensions..:
+17bcc20--BZ-1266138: managed beans can't be used during container lifecycle on WAS. Code is not nice, but is the only way that I managed to make it work on WAS without changing all architecture.--Alexandre Porcelli
+
+**************************************************************
+guvnor..:
+4c71c09--Added latest Zanata translation changes--Michael Biarnes Kiefer
+6e407f2--BZ-1283953: review some fs writes that are missing batch mechanism.--Alexandre Porcelli
+
+**************************************************************
+kie-wb-common..:
+6a13605--Prevent constraint fail when there is no identity on request scope--ederign
+77b7285--Null pointer exception when a repo related event are not associated with a project--ederign
+0bb48b3--Added latest Zanata translation changes--Michael Biarnes Kiefer
+
+**************************************************************
+drools-wb..:
+a23cb7c--Added latest Zanata translation changes--Michael Biarnes Kiefer
+
+**************************************************************
+jbpm-designer..:
+1e290a2--Added latest Zanata translation changes--Michael Biarnes Kiefer
+8a144d7--BZ 1283214 - After Force Unlock locked user can continue to work with Business Process but can't to save it--Tihomir Surdilovic
+02601ad--Revert "BZ 1283214 - After Force Unlock locked user can continue to work with Business Process but can't to save it"--Christian Sadilek
+2dcd04c--BZ 1283214 - After Force Unlock locked user can continue to work with Business Process but can't to save it--Tihomir Surdilovic
+
+**************************************************************
+jbpm-console-ng..:
+07e0288--BZ:1283537 - jbpmHumanTasksWithUser links PeopleAssignments_PotOwners.task_id to AuditTaskImpl.id instead of AuditTaskImpl.taskId--nmirasch
+0280ce8--BZ:1284004 - Mysql57: Creating Process Instances filter with PROCESSID--nmirasch
+8c3f5de--Added latest Zanata translation changes--Michael Biarnes Kiefer
+43facbb--BZ:1272842 - Sybase 15.7: "DataSetLookupException: Implicit conversion from datatype 'VARCHAR' to 'INT' is not allowed"--nmirasch
+f704c26--BZ-1248020 - JobExecutor: Job Service Settings dialog active despite disabled job executor--Maciej Swiderski
+8434461--added latest Zanata translation fixes--kiereleaseuser
+
+**************************************************************
+kie-wb-distributions..:
+bfcb6c2-- BZ:1283537 - jbpmHumanTasksWithUser links PeopleAssignments_PotOwners task_id to AuditTaskImpl.id instead of AuditTaskImpl.taskId--nmirasch
+bd437e6--BZ:1284004 - Mysql57: Creating Process Instances filter with PROCESSID--nmirasch
+3147552--Added latest Zanata translation changes--Michael Biarnes Kiefer
+145f992--BZ1192831: User with no privileges for Repository can view and modify assets in that Repository. Ensure the same instance of RuntimeAuthorizationManager is used.--Michael Anstis
+
+**************************************************************
